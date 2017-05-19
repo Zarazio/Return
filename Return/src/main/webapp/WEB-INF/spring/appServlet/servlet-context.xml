@@ -55,7 +55,7 @@
 	
 	<!-- 저장경로설정 // 경로재설정 이미지가 저장된 폴더 upload -->
 	<beans:bean id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="D:\\Spring\\Return\\upload">
+		<beans:constructor-arg value="resources/upload">
 		</beans:constructor-arg>
 	</beans:bean>
 	
