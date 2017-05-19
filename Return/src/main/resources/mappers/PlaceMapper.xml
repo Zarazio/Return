@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zara.zio.placeMapper">
+	<insert id="place_insert"> <!-- 정보 isnert -->
+		insert into place_tbl(place_code, place_name, place_content, place_address, place_lat, place_lng, place_type, place_on)
+		values (#{place_code}, #{place_name}, #{place_content}, #{place_address}, #{place_lat}, #{place_lng}, #{place_type}, #{place_on})
+	</insert>
+	<insert id="img_insert"> <!-- 이미지 isnert -->
+		insert into pimg_tbl (place_code, img_code, place_img, file_name) values (#{place_code}, #{img_code}, #{place_img}, #{file_name})
+	</insert>
+	<select id="place_max" resultType="int"> <!-- 인설트후 맥스값 구하기 -->
+		SELECT max(place_code)
+		FROM place_tbl 
+	</select>
+	<select id="place_list" resultType="PlaceVO">
+		select *
+		from place_tbl
+		order by place_code desc
+		limit #{startRecord}, #{recordPage}
+	</select>
+	<select id="totalCount" resultType="Integer">
+		select count(*)
+		from place_tbl
+	</select>
+	<select id="read" resultType="PlaceVO"> <!-- mybatis-config.xml에서 "web.spr.bbs.bean.BoardVO"를 "BoardVO"로 생략 -->
+		select * 
+		from place_tbl 
+		where place_code=#{no}
+	</select>
+	<select id="read_img" resultType="PlaceVO">
+		SELECT * 
+		from pimg_tbl
+		where place_code = #{no};
+	</select>
+	<update id="place_update">
+		update place_tbl set place_name=#{v.place_name}, place_content=#{v.place_content}, place_address=#{v.place_address}, 
+		place_lat=#{v.place_lat}, place_lng=#{v.place_lng}, place_type=#{v.place_type}, place_on=#{v.place_on}
+		where place_code = #{no}
+	</update>
+	<delete id="placeAll_delete">
+		delete from place_tbl where place_code = #{no}
+	</delete>
+	<delete id="pimg_delete">
+		delete from pimg_tbl where place_code = #{no}
+	</delete>
+	
+	<select id="place_listAll">
+	</select>
+</mapper>
