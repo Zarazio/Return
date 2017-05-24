@@ -3,19 +3,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<div class="fixmenu turn-bg-dark">
+<div id="topBar" class="fixmenu">
 	<div class="container">
-		<ul class="top-links list-inline pull-right turn-hei-center">
+		<ul class="top-links list-inline pull-right"> <!-- .turn-hei-center -->
 			<c:if test="${info == null}">
 				<li class=""><a href="login">로그인 메뉴</a>
 				<li class=""><a href="register">회원가입 메뉴</a>
 			</c:if>
 			<c:if test="${info == 'admin'}">
-				<li class="text-welcome hidden-xs"><strong>${mem.user_id}님</strong> 환영합니다.
+				<li class="text-welcome"><strong>${mem.user_id}</strong> 님.
 				<li class="hidden-xs"><a href="logout">로그아웃</a>
 			</c:if>
 			<c:if test="${info == 'user'}">
-				<li class="text-welcome hidden-xs"><strong>${mem.user_id}님</strong> 환영합니다.
+				<li class="text-welcome"><strong>${mem.user_id}</strong> 님.
 				<li class="hidden-xs"><a href="logout">로그아웃</a>
 			</c:if>
 		</ul>
@@ -30,7 +30,7 @@
 						<span class="badge badge-aqua btn-xs badge-corner">2</span>
 						<i class="fa fa-bars"></i>
 					</a>
-					<div class="quick-cart-box padding-10" style="display:none;"> <!-- none, block 이벤트 적용 -->
+					<div class="quick-cart-box padding-10" style="display:none;"> <!-- none, block evnet -->
 						<h4>My Information</h4>
 						<!-- 반복문 이벤트적용 -->
 						<div class="quick-cart-wrapper">
@@ -61,10 +61,11 @@
 				<div class="nav-main">
 					<ul id="topMain" class="nav nav-pills nav-main has-topBar">
 						<c:if test="${info == null}">
-							<li><a href="#">일정등록하기</a> <!-- 페이지 이동 -->
-							<li><a href="#">장소정보</a>
-							<li><a href="#">커뮤니케이션</a>
-							<li><a href="#">Books-shop</a>
+							<li><a href="#">Log</a> <!-- 페이지 이동 -->
+							<li><a href="#">일정만들기</a>
+							<li><a href="#">장소</a>
+							<li><a href="#">Book</a>
+							<li><a href="comuList">커뮤니티</a>
 						</c:if>
 						<c:if test="${info == 'admin'}">
 							<li><a href="memberList">회원정보 관리</a>
@@ -73,10 +74,11 @@
 							<li><a href="#">기타 관리</a>
 						</c:if>
 						<c:if test="${info == 'user'}">
-							<li><a href="#">일정등록하기</a>
-							<li><a href="#">장소정보</a>
-							<li><a href="#">커뮤니케이션</a>
-							<li><a href="#">Books-shop</a>
+							<li><a href="#">Log</a>
+							<li><a href="#">일정만들기</a>
+							<li><a href="#">장소</a>
+							<li><a href="#">Book</a>
+							<li><a href="comuList">커뮤니티</a>
 						</c:if>
 					</ul>
 				</div>

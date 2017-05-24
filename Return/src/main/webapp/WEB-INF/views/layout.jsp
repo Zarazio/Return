@@ -17,26 +17,26 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700" rel="stylesheet" type="text/css" />
 
 <!-- BOOTSTRAP style -->
-<link rel="stylesheet" type="text/css" href="<c:url value="./resources/css/bootstrap.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="./resources/bootstrap/css/bootstrap.css"/>">
 
 <!-- REVOLUTION SLIDER -->
-<link rel="stylesheet" type="text/css" href="<c:url value="./resources/css/slider/extralayers.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="./resources/css/slider/settings.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="./resources/libraryCss/slider/extralayers.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="./resources/libraryCss/slider/settings.css"/>">
 
 <!-- THEME CSS -->
-<link rel="stylesheet" type="text/css" href="<c:url value="./resources/css/theme/essentials.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="./resources/css/theme/layout.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="./resources/libraryCss/theme/essentials.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="./resources/libraryCss/theme/layout.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="./resources/libraryCss/theme/thematics-education.css"/>">
 
 <!-- PAGE LEVEL SCRIPTS CSS -->
-<link rel="stylesheet" type="text/css" href="<c:url value="./resources/css/page_level/header-1.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="./resources/css/page_level/layout-shop.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="./resources/libraryCss/page_level/header-1.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="./resources/libraryCss/page_level/layout-shop.css"/>">
 
 <!-- Design Color -->
-<link rel="stylesheet" type="text/css" href="<c:url value="./resources/css/designColor/lightgrey.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="./resources/libraryCss/designColor/blue.css"/>">
 
-<!-- JQUERY , BOOTSTRAP script -->
+<!-- JQUERY script -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
 <title>Travel Main</title>
 </head>
 <body>

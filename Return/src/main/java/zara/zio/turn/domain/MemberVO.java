@@ -6,7 +6,7 @@ public class MemberVO {
 
 	private String user_id; // 회원 아이디 
 	private String user_pass; // 회원 패스워드
-	private String user_birth; // 회원 생년월일
+	private String user_birth; // 회원 생년월일 
 	private int user_gender; // 회원성별
 	private String user_phone; // 회원 폰넘버
 	private String user_email; // 회원 이메일
