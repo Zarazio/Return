@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <script src="<c:url value="./resources/js/login/loginConfirm.js"/>" ></script>
 <div class="container">
-<form method="post" id="test_submit" onsubmit="return false;">
+<form id="test_submit" onsubmit="return false;">
 	<ul>
 		<li>
 			<div class="form-group">

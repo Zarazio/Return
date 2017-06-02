@@ -2494,7 +2494,9 @@
 	}
 
 
-
+	$(".available").click(function() {
+		alert("여기서?");
+	});
 
 
 /** Pickers
@@ -2504,19 +2506,20 @@
 		/** Date Picker
 			<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
 		 ******************* **/
+		
 		var _container_1 = jQuery('.datepicker');
 		
 		if(_container_1.length > 0) {
-			loadScript(plugin_path + 'bootstrap.datepicker/js/bootstrap-datepicker.min.js', function() {
+			loadScript(plugin_path + 'libraryJs/bootstrap.datepicker/js/bootstrap-datepicker.js', function() {
 		
 				if(jQuery().datepicker) {
 
 					_container_1.each(function() {
 						var _t 		= jQuery(this),
-							_lang 	=	_t.attr('data-lang') || 'en';
+							_lang 	= _t.attr('data-lang') || 'en';
 
-						if(_lang != 'en' && _lang != '') { // load language file
-							loadScript(plugin_path + 'bootstrap.datepicker/locales/bootstrap-datepicker.'+_lang+'.min.js');
+						if(_lang != 'en' && _lang != null) { // load language file
+							loadScript(plugin_path + 'libraryJs/bootstrap.datepicker/locales/bootstrap-datepicker.'+_lang+'.min.js');
 						}
 
 						jQuery(this).datepicker({
@@ -2545,16 +2548,16 @@
 		}
 
 
-
-
 		/** Range Picker
 			<input type="text" class="form-control rangepicker" value="2015-01-01 - 2016-12-31" data-format="yyyy-mm-dd" data-from="2015-01-01" data-to="2016-12-31">
 		 ******************* **/
 		var _container_2 = jQuery('.rangepicker');
 		
+		var nowDate = new Date();
+		
 		if(_container_2.length > 0) {
-			loadScript(plugin_path + 'bootstrap.daterangepicker/moment.min.js', function() {
-				loadScript(plugin_path + 'bootstrap.daterangepicker/daterangepicker.js', function() {
+			loadScript(plugin_path + 'libraryJs/bootstrap.daterangepicker/moment.js', function() {
+				loadScript(plugin_path + 'libraryJs/bootstrap.daterangepicker/daterangepicker.js', function() {
 			
 					if(jQuery().datepicker) {
 
@@ -2566,17 +2569,18 @@
 							_t.daterangepicker(
 							{
 								format: 		_format,
-								startDate: 		_t.attr('data-from'),
-								endDate: 		_t.attr('data-to'),
-
-								ranges: {
-								   'Today': [moment(), moment()],
-								   'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-								   'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-								   'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-								   'This Month': [moment().startOf('month'), moment().endOf('month')],
-								   'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-								}
+								minDate: 		nowDate, // 현재날짜 기준 
+//								startDate: 		_t.attr('data-from'), // 선택날짜 
+//								maxDate: 		_t.attr('data-to'), // 마지막날짜
+								dateLimit: { days : 30 }, // 날짜의 각 범위 
+//								ranges: {
+//								   'Today': [moment(), moment()],
+//								   'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+//								   'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+//								   'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+//								   'This Month': [moment().startOf('month'), moment().endOf('month')],
+//								   'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+//								}
 							}, 
 							function(start, end, label) {
 								// alert("A new date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));

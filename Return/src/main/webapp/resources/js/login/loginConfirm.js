@@ -20,6 +20,8 @@ $(document).ready(function(){
 				success : function(data) { // @ResponseBody의 있는 데이터가 리턴된다.  로그인정보가 리턴된다.
 					if (data === "1") {
 						// 로그인에 성공하였을시.  
+						$('#test_submit').attr('method','post');
+						$('#test_submit').attr('action','main');
 						$('#test_submit')[0].submit();
 						// 폼의 입력에 태그에 가지고있는 정보를 가지고 세션을 활성화 시킨다. 
 					} else {

@@ -14,7 +14,6 @@
 		<th>회원 아이디</th>
 		<th>회원 가입날짜</th>
 	</tr>
-	
 	<c:forEach items="${member}" var="member">
 		<tr>
 			<td>

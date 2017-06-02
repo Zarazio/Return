@@ -1044,7 +1044,7 @@ section.page-header .breadcrumb {
 	z-index:10;
 }
 section.page-header .breadcrumb>li+li:before {
-	content:"•";
+	content:"��";
 }
 section.page-header .breadcrumb a {
 	color:#333;
@@ -1644,7 +1644,7 @@ section.dark.page-header ul.page-options a {
 	}
 
 	body.menu-vertical #mainMenu.sidebar-vertical {
-		position:fixed;
+		/** position:fixed; **/ 
 		left:0; top:0; bottom:0;
 		width:263px;
 		background-color:#fff;
@@ -2666,7 +2666,7 @@ section.dark.page-header ul.page-options a {
 	#topBar {
 		display:block;
 		background-color:#fff;
-		border-bottom:rgba(0,0,0,0.05) 1px solid;
+		border-bottom:rgba(251,251,251,0.25) 1px solid;
 	}
 	#topBar>.border-bottom {
 		border-bottom:rgba(0,0,0,0.05) 1px solid;
@@ -2749,7 +2749,7 @@ section.dark.page-header ul.page-options a {
 		display:inline-block;
 		margin-left:-3px;
 		position:relative;
-		border-right:rgba(0,0,0,0.1) 1px solid;
+		border-right:rgba(251,251,251,0.25) 1px solid;
 		
 	}
 	#topBar ul.top-links>li:hover >.dropdown-menu,
@@ -2832,7 +2832,7 @@ section.dark.page-header ul.page-options a {
 		- search, etc
 	*/
 	#header ul.nav-second-main {
-		border-left:rgba(0,0,0,0.1) 1px solid;
+		border-left:rgba(251,251,251,0.25) 1px solid;
 		padding-left:15px;
 		margin-top: 39px;
 

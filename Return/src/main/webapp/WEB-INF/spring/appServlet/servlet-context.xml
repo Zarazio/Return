@@ -16,6 +16,7 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/**/**" location="/resources/**/" />
 	<resources mapping="/**/**/**" location="/resources/**/**/**" />
+	<resources mapping="/**/**/**/**" location="/resources/**/**/**/**" />
 	<!-- js경로 설정  -->
 	<!-- <resources mapping="/js/**" location="/resources/js/" /> -->
 	<!-- <resources mapping="/js/**/**" location="/resources/js/**/**" /> -->

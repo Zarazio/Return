@@ -33,13 +33,14 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="./resources/libraryCss/page_level/layout-shop.css"/>">
 
 <!-- Design Color -->
-<link rel="stylesheet" type="text/css" href="<c:url value="./resources/libraryCss/designColor/blue.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="./resources/libraryCss/designColor/lightgrey.css"/>">
 
-<!-- JQUERY script -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+<!-- JQUERY, datepickers script -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="<c:url value="./resources/js/modal/modalView.js"/>" ></script>
 <title>Travel Main</title>
 </head>
-<body>
+<body class="enable-animation menu-vertical">
 	<div id="wrap">
 		<tiles:insertAttribute name="header" />
 		<tiles:insertAttribute name="content" />

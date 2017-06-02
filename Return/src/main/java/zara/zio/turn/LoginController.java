@@ -58,8 +58,14 @@ public class LoginController {
 		return "loginForm/login";
 	}
 	
+	// 메인페이지 이동 컨트롤러
+	@RequestMapping(value="main", method = RequestMethod.GET)
+	public String layoutForm() {
+		return "layout";
+	}
+	
 	//로그인 정보전송 세션활성화 
-	@RequestMapping (value="login", method=RequestMethod.POST)
+	@RequestMapping (value="main", method=RequestMethod.POST) // 로그인이동
 	public String Login(HttpServletRequest request, HttpServletResponse response, MemberVO mem) throws Exception {
 		
 		HttpSession session = request.getSession();

@@ -3776,9 +3776,9 @@ a.btn.btn-xs {
 	   -moz-border-radius: 3px;
 			border-radius: 3px;
 
-	-webkit-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-	   -moz-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-			box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+	   -moz-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+			box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 .modal-header .close {
 	margin-top:2px;
@@ -8334,7 +8334,8 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
 }
 
 .daterangepicker .ranges .range_inputs>div:nth-child(2) {
-  padding-left: 11px;
+  padding-left: 0px;
+  /** padding-left: 11px; **/
 }
 
 .daterangepicker .calendar {
@@ -8372,7 +8373,8 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
 }
 
 .daterangepicker .ranges input {
-  font-size: 11px;
+  /** font-size: 11px; **/
+  cursor: auto; /** Ãß°¡ **/
 }
 
 .daterangepicker .ranges .input-mini {

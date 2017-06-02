@@ -3,6 +3,52 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+<!-- Modal menu Controll-->
+<div id="myModal" class="modal fade" role="dialog">
+  	<div class="modal-dialog">
+	   
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	    	<form id="submitData" class="padding-10" onsubmit="return false;">
+		      	<div class="modal-header">
+		        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		        	<h4 class="modal-title text-center">일정만들기</h4>
+		    	</div>
+			    <div class="modal-body text-center">
+			        	<div class="datepicker text-center"> <!-- 캘린더를 띄위기위한 기본틀 날짜함수 -->
+							<!-- range picker -->
+							<p></p>
+							<p>
+								<input type="text" class="form-control text-center rangepicker" name="scheduleDate"
+								data-format="yyyy-mm-dd" placeholder="시작일자 - 종료일자 " value="">
+							</p>
+							<p>
+								<a id="addGroup" class="btn btn-primary btn-lg btn-block">그룹추가 +</a>
+							</p>
+						</div>
+			    </div>
+		      	<div class="modal-footer">
+		      		<input type="submit" class="btn btn-primary margin-top-8 pull-center nextSchedule" value="다음"></input>
+		        	<button type="button" class="btn btn-default margin-top-8 pull-center" data-dismiss="modal">취소</button>
+		    	</div>
+	    	</form>
+	    </div>
+	    <div class="modal-content turn-modal padding-10">
+	    	<div class="modal-header">
+	        	<a class="close closeGroup">&times;</a>
+	        	<h4 class="modal-title text-center">친구목록</h4>
+	    	</div>
+	    	<div class="modal-body text-center">
+	    	</div>
+	    	<div class="modal-footer">
+	    	</div>
+	    </div>
+
+  	</div>
+</div>
+<!-- /Modal menu Controll-->
+
+<!-- TopBar menu -->
 <div id="topBar" class="fixmenu">
 	<div class="container">
 		<ul class="top-links list-inline pull-right"> <!-- .turn-hei-center -->
@@ -11,16 +57,18 @@
 				<li class=""><a href="register">회원가입 메뉴</a>
 			</c:if>
 			<c:if test="${info == 'admin'}">
-				<li class="text-welcome"><strong>${mem.user_id}</strong> 님.
+				<li class="text-welcome"><a href="#"><strong>${mem.user_id}</strong> 님.</a>
 				<li class="hidden-xs"><a href="logout">로그아웃</a>
 			</c:if>
 			<c:if test="${info == 'user'}">
-				<li class="text-welcome"><strong>${mem.user_id}</strong> 님.
+				<li class="text-welcome"><a href="#"><strong>${mem.user_id}</strong> 님.</a>
 				<li class="hidden-xs"><a href="logout">로그아웃</a>
 			</c:if>
 		</ul>
 	</div>
 </div>
+<!-- /TopBar menu -->
+
 <div id="header" class="sticky clearfix">
 	<div id="topNav">
 		<div class="container">
@@ -62,7 +110,7 @@
 					<ul id="topMain" class="nav nav-pills nav-main has-topBar">
 						<c:if test="${info == null}">
 							<li><a href="#">Log</a> <!-- 페이지 이동 -->
-							<li><a href="#">일정만들기</a>
+							<li><a href="login">일정만들기</a>
 							<li><a href="#">장소</a>
 							<li><a href="#">Book</a>
 							<li><a href="comuList">커뮤니티</a>
@@ -74,11 +122,11 @@
 							<li><a href="#">기타 관리</a>
 						</c:if>
 						<c:if test="${info == 'user'}">
-							<li><a href="#">Log</a>
-							<li><a href="#">일정만들기</a>
-							<li><a href="#">장소</a>
-							<li><a href="#">Book</a>
-							<li><a href="comuList">커뮤니티</a>
+							<li><a href="#">Log</a></li>
+							<li><a id="modals" data-toggle="modal" data-target="#myModal">일정만들기</a></li>
+							<li><a href="#">장소</a></li>
+							<li><a href="#">Book</a></li>
+							<li><a href="comuList">커뮤니티</a></li>
 						</c:if>
 					</ul>
 				</div>

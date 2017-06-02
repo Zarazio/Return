@@ -28,7 +28,7 @@
 		<!-- breadcrumbs -->
 		<ol class="breadcrumb">
 			<li><a href="main">메인</a></li>
-			<li class="active">커뮤니티</li>
+			<li class="active"> 커뮤니티</li>
 		</ol><!-- /breadcrumbs -->
 
 	</div>
@@ -65,8 +65,8 @@
 						<h4>CATEGORIES</h4>
 					</div>
 					<ul class="list-group list-group-bordered list-group-noicon uppercase">
-						<li class="list-group-item"><a href="#"><span class="size-11 text-muted pull-right">(12)</span>커뮤니티</a></li>
-						<li class="list-group-item"><a href="#"><span class="size-11 text-muted pull-right">(8)</span>QnA 관리</a></li>
+						<li class="list-group-item"><a href="comuList"><span class="size-11 text-muted pull-right">(12)</span>커뮤니티</a></li>
+						<li class="list-group-item"><a href="qnaList"><span class="size-11 text-muted pull-right">(8)</span>고객문의</a></li>
 					</ul>
 					<!-- /side navigation -->
 
@@ -254,24 +254,23 @@
 				<div class="blog-post-item">
 					<table class="table table-striped">
 						<tr>
-							<th class="text-center" width="10%">No</th>
-							<th class="text-center" width="50%">제목</th>
-							<th class="text-center" width="10%">글쓴이</th>
+							<th class="text-center" width="6%">No</th>
+							<th class="text-center" width="54%">제목</th>
+							<th class="text-center" width="16%">글쓴이</th>
 							<th class="text-center" width="10%">조회수</th>
-							<th class="text-center" width="20%">날짜</th>
+							<th class="text-center" width="14%">날짜</th>
 						</tr>
 						<c:forEach items="${list}" var="place">
 						<tr>
-							<td></td>
-							<td>
+							<td class="text-center"></td>
+							<td class="text-center">
 								<a href="${place.place_code}" class="place_info">
 								${place.place_name}
 								</a>
 							</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td>
+							<td class="text-center"></td>
+							<td class="text-center"></td>
+							<td class="text-center">
 								<fmt:formatDate pattern="yyyy-MM-dd" value="${place.add_date}" />
 							</td>
 						</tr>

@@ -1,4 +1,49 @@
 @CHARSET "UTF-8";
 
+html { overflow-x:hidden; }
+
 .turn-bgblue { color:#ccc; background-color: #179BD7; border-bottom-color: rgba(255,255,255,0.1);}
 .turn-hei-center { margin: 8px 0px 8px 0px !important;}
+.turn-margin-top-28 { margin-top:28px; }
+#mainMenu { height:853px; float:left;}
+#heightfull { height:853px !important; }
+
+.turn-border-bottom { border-bottom:1px solid rgba(255, 255, 255, 0.1); }
+.turn-font-set { font-family:-webkit-body; font-size:16px; font-weight: bold; margin-top:4px; }
+.turn-nav { border-top-color: rgb(51, 51, 51) !important; }
+.turn-center { text-align: center !important; }
+.turn-scroll-auto { overflow-y:auto; }
+
+.turn-a { width:230px !important; }
+.turn-b { width:230px !important; }
+.turn-c { width:310px !important; }
+.turn-tb-16 { margin-top: 15px; margin-bottom: 15px;}
+.turn-border { border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important; }
+
+.turn-modal { 
+	display: none;
+	float: left;
+	width: 280px;
+    position: absolute !important;
+    /* right: -250px; */
+    left: 600px !important;
+    top: 0;
+    bottom: 0;
+    background-color: #f2f4f7 !important; 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {bottom:-50x; opacity:0 } 
+    to {bottom:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {bottom:-50px; opacity:0 }
+    to {bottom:0; opacity:1}
+}
