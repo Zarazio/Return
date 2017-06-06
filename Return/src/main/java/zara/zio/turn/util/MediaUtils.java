@@ -20,11 +20,11 @@ public class MediaUtils {
 		return mediaMap.get(type.toUpperCase());
 	}
 	
-	// UploadFileUtilsÅ¬·¡½º¿¡¼­ ÃßÃâÇÑ ÆÄÀÏÀÇ È®ÀåÀÚ¸íÀ» ´ë¹®ÀÚ·Î º¯È¯ÇÏ°í, 
-	// mediaMap¿¡ ´ã±ä °ªÀ» È£ÃâÇÑ µÚ ¸®ÅÏ.
-	// 3°¡Áö(jpg,gif,png) ÀÌ¹ÌÁö ÆÄÀÏÀÏ °æ¿ì¿¡´Â °ªÀÌ º¹»çµÇ¾î ¸®ÅÏµÇÁö¸¸, ¾Æ´Ò°æ¿ì¿¡´Â null»óÅÂ·Î ¸®ÅÏ.
+	// UploadFileUtilsí´ëž˜ìŠ¤ì—ì„œ ì¶”ì¶œí•œ íŒŒì¼ì˜ í™•ìž¥ìžëª…ì„ ëŒ€ë¬¸ìžë¡œ ë³€í™˜í•˜ê³ , 
+	// mediaMapì— ë‹´ê¸´ ê°’ì„ í˜¸ì¶œí•œ ë’¤ ë¦¬í„´.
+	// 3ê°€ì§€(jpg,gif,png) ì´ë¯¸ì§€ íŒŒì¼ì¼ ê²½ìš°ì—ëŠ” ê°’ì´ ë³µì‚¬ë˜ì–´ ë¦¬í„´ë˜ì§€ë§Œ, ì•„ë‹ê²½ìš°ì—ëŠ” nullìƒíƒœë¡œ ë¦¬í„´.
 	/*
-	 *  MediaUtilsÀº È®ÀåÀÚ¸¦ °¡Áö°í ÀÌ¹ÌÁö Å¸ÀÔÀÎÁö¸¦ ÆÇ´ÜÇØ ÁÖ´Â¿ªÇÒ
-	 *  º°µµÀÇ Å¬·¡½º·Î ±¸¼ºÇÑÀÌÀ¯´Â ºê¶ó¿ìÀú¿¡¼­ ÆÄÀÏÀ» ´Ù¿î·Îµå ÇÒ°ÍÀÎÁö º¸¿©ÁÙ°ÍÀÎÁö °áÁ¤ÇÏ±â À§ÇÔ. 
+	 *  MediaUtilsì€ í™•ìž¥ìžë¥¼ ê°€ì§€ê³  ì´ë¯¸ì§€ íƒ€ìž…ì¸ì§€ë¥¼ íŒë‹¨í•´ ì£¼ëŠ”ì—­í• 
+	 *  ë³„ë„ì˜ í´ëž˜ìŠ¤ë¡œ êµ¬ì„±í•œì´ìœ ëŠ” ë¸Œë¼ìš°ì €ì—ì„œ íŒŒì¼ì„ ë‹¤ìš´ë¡œë“œ í• ê²ƒì¸ì§€ ë³´ì—¬ì¤„ê²ƒì¸ì§€ ê²°ì •í•˜ê¸° ìœ„í•¨. 
 	 */
 }

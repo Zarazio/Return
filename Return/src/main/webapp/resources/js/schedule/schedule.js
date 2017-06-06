@@ -13,6 +13,11 @@ $(document).ready(function(){
 	var currDay = 24 * 60 * 60 * 1000; // 일수 (차) 구하는식 
 	var cnt = parseInt(diff/currDay); // date (차) 결과값
 	
+	var planDay = nal(0) ; // 계획 날짜 확인 용도
+	var groupCode = $("#groupCode").text();
+	var placeCode ; //place_code 받는 변수
+	
+	
 	elements = $(".addMenu"); // ul 엘리먼트값불러온다.
 	
 	// 일정의 날들을 순차적으로 실행
@@ -26,7 +31,9 @@ $(document).ready(function(){
 	$(".addMenu").on("click",".dayon", function(){
 		// var old = $(this).attr("data-day");
 		
+		planDay = $(this).attr("data-nal");
 		$(".dayChoose").text($(this).text() + " - " + $(this).attr("data-nal") + " " + $(this).attr("date-day"));
+		planDayPrint();
 	});
 	
 	
@@ -52,7 +59,9 @@ $(document).ready(function(){
 				var count = data.length;
 				var elem = "<ul>";
 				for(var i=0; i<count; i++) {
-					elem += "<li><img src='http://placehold.it/150x150'>";
+					elem += "<li class='place placeCode' data-code='" + data[i].place_code + "'>"
+						 + "<img src='http://placehold.it/150x150'>";
+
 				}
 				elem += "</ul>"
 				$(".placeList").append(elem);
@@ -88,7 +97,8 @@ $(document).ready(function(){
 		
 	}
 	
-	function day(i) { // 요일을 구하는 함수
+	// 요일을 구하는 함수
+	function day(i) {
 		
 		var dat = new Date(day1);
 		var day = dat.getDate() + i;
@@ -105,5 +115,84 @@ $(document).ready(function(){
 
 	    return weekday[dat.getDay()]; 
 	}
+	
+	
+	
+	
+	// draggable
+    $(".placeList").on("mouseover", ".place", function(){
+       // placeCode에 현재 클릭하고 있는 애를 선택
+    	placeCode = $(this) ;
+    	
+       $(".place").draggable({
+          helper :  "clone"
+       });
+       
+       $(".selectPlace").droppable({drop : function(event, ui) {
+    	   
+    	   $(this).append($("<li></li>").addClass("planList").html(ui.draggable.html()));
+          
+    	   // place 장소 코드를 받아옴
+    	   placeCode = placeCode.attr("data-code");
+    	   console.log(placeCode);
+    	
+    	   alert("placeCode : " + placeCode);
+          
+    	   $(".planList").css("border-bottom","1px solid black");
+          
+    	   planListStore(placeCode) ;
+       }});
+       
+       
+    });
+    
+    // draggable 한거 db에 저장
+    function planListStore(placeCode){
+     
+    	alert(placeCode + "플랜함수");
+    	alert(planDay  + "플랜함수");
+    	alert(groupCode  + "플랜함수");
+       
+    	$.ajax({
+    		type : 'POST',
+    		url : 'planList',
+    		data : {
+    			place : placeCode,
+    			plan : planDay,
+    			group : groupCode
+    		},
+    		success : function(data){
+    			alert(data + "안했구나나아아아아");
+    		}, 
+    		error : function() {
+    			alert("에러입니다.11111");
+    		}
+	   })
+       
+       console.log("ddd");
+    
+    }
+       
+    function planDayPrint(){
+    	alert(group_Code) ;
+        alert(planDay);
+       
+        $.ajax({
+        	type : 'POST',
+        	url : 'planDayList',
+        	data : {
+        		group : group_Code,
+        		plan : planDay
+        	},
+        	success : function(data){
+        		alert(data + "안했구나나아아아아");
+        	}, 
+        	error : function() {
+        		alert("에러입니다.22222");
+        	}
+        })
+    }
+ 
+
 	
 });

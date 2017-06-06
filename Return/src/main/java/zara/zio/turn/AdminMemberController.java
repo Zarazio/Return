@@ -32,16 +32,16 @@ public class AdminMemberController {
 		
 		int totalCount = service.getTotalAll(); 
 		
-		pagination.setTotalCount(totalCount); // pagination °è»ê
+		pagination.setTotalCount(totalCount); // pagination ê³„ì‚°
 		
 		return "adminPage/memberList";
 	}
 	
 	@RequestMapping(value="/memberRead", method=RequestMethod.GET)
 	public String memberRead(@RequestParam(value="user_id", defaultValue="-1") String user_id, @ModelAttribute Pagination pagination, Model model) throws Exception {
-		// (read?bno=?? ¶ó´Â ÁÖ¼Ò·Î Á¢±ÙÇÑ´Ù.) 
-		MemberVO member = service.read(user_id); // ÀÚ¹Ùºó °´Ã¼¸¦ ¹İÈ¯
-		model.addAttribute("member", member); // ÇØ´çÁ¤º¸¹İÈ¯ 
+		// (read?bno=?? ë¼ëŠ” ì£¼ì†Œë¡œ ì ‘ê·¼í•œë‹¤.) 
+		MemberVO member = service.read(user_id); // ìë°”ë¹ˆ ê°ì²´ë¥¼ ë°˜í™˜
+		model.addAttribute("member", member); // í•´ë‹¹ì •ë³´ë°˜í™˜ 
 		
 		return "adminPage/memberRead";
 	}
@@ -57,7 +57,7 @@ public class AdminMemberController {
 	@RequestMapping(value="/memberSet", method=RequestMethod.GET)
 	public String memberSet(String check, @ModelAttribute Pagination pagination, Model model) throws Exception {
 		
-		MemberVO member = service.read(check); // ÀÚ¹Ùºó °´Ã¼¸¦ ¹İÈ¯
+		MemberVO member = service.read(check); // ìë°”ë¹ˆ ê°ì²´ë¥¼ ë°˜í™˜
 		
 		String yyyy = member.getUser_birth().substring(0,4);
 		String mm = member.getUser_birth().substring(5,7);

@@ -1,7 +1,6 @@
 package zara.zio.turn;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-
+import java.sql.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import zara.zio.turn.domain.GroupVO;
 import zara.zio.turn.domain.PlaceVO;
+import zara.zio.turn.domain.TravelListVO;
+import zara.zio.turn.persistence.GroupTravelService;
 import zara.zio.turn.persistence.PlaceService;
 
 @Controller
@@ -22,24 +24,46 @@ public class SchduleContoller {
 	@Inject
 	private PlaceService service;
 	
-	@RequestMapping (value="scheduleSet", method=RequestMethod.POST) // ½ºÄÉÁì ÆäÀÌÁö ÀÌµ¿ 
-	public String schduleSet(String scheduleDate, String local, Model model) {
+	@Inject
+	private GroupTravelService service1;
+	
+	
+	@RequestMapping (value="scheduleSet", method=RequestMethod.POST) // ìŠ¤ì¼€ì¥´ í˜ì´ì§€ ì´ë™ 
+	public String schduleSet(GroupVO group, String scheduleDate, String local, Model model) throws Exception {
 		
+		
+		String[] date = scheduleDate.split(" - ");
+		   
+	    String date01 = date[0] ;
+	    String date02 = date[1] ;
+	      
+	    Date start_Date = Date.valueOf(date01) ;
+	    Date end_Date = Date.valueOf(date02) ;
+	   
+	    group.setStart_Date(start_Date);
+	    group.setEnd_Date(end_Date);
+	       
+	    service1.create(group);
+	      
+	    // groupCode ë½‘ì•„ë‚´ëŠ” ë¬¸
+	    int groupCode = service1.selectGroupCode(group) ;
+	    
 		System.out.println(scheduleDate);
 		
 		if(scheduleDate.isEmpty())
 			scheduleDate = "nullTest";
 		
 		if(local.isEmpty())
-			local = "¾Ë¼ö¾ø´Â Áö¿ª";
+			local = "ì•Œìˆ˜ì—†ëŠ” ì§€ì—­";
 		
 		model.addAttribute("scheduleDate", scheduleDate);
 		model.addAttribute("local", local);
+		model.addAttribute("groupCode", groupCode);
 		
 		return "schedulePage/schdulePageA";
 	}
 	
-	@RequestMapping (value="scheduleSet", method=RequestMethod.GET) // ½ºÄÉÁì ÆäÀÌÁö ÀÌµ¿ 
+	@RequestMapping (value="scheduleSet", method=RequestMethod.GET) // ìŠ¤ì¼€ì¥´ í˜ì´ì§€ ì´ë™ 
 	public String schduleSetG(String scheduleDate, String local, Model model) {
 		
 		System.out.println(scheduleDate);
@@ -48,7 +72,7 @@ public class SchduleContoller {
 			scheduleDate = "nullTest";
 		
 		if(local == null)
-			local = "¾Ë¼ö¾ø´Â Áö¿ª";
+			local = "ì•Œìˆ˜ì—†ëŠ” ì§€ì—­";
 		
 		model.addAttribute("scheduleDate", scheduleDate);
 		model.addAttribute("local", local);
@@ -57,7 +81,7 @@ public class SchduleContoller {
 	}
 	
 	@ResponseBody
-	@RequestMapping (value="placeList", method=RequestMethod.GET) // Àå¼ÒÁ¤º¸ °¡Á®¿À±â
+	@RequestMapping (value="placeList", method=RequestMethod.GET) // ì¥ì†Œì •ë³´ ê°€ì ¸ì˜¤ê¸°
 	public List<PlaceVO> placeList(HttpServletRequest request) throws Exception {
 		
 		String local = request.getParameter("localData");
@@ -71,5 +95,41 @@ public class SchduleContoller {
 		
 		return list;
 	}
+	
+	@ResponseBody
+	@RequestMapping (value="planList", method=RequestMethod.POST)
+	public void planList(String place, String plan, String group, TravelListVO travel) throws Exception{
+	    int place_code = Integer.parseInt(place);
+	    int group_Code = Integer.parseInt(group);
+	    Date travel_Date = Date.valueOf(plan);
+	      
+	    travel.setPlace_code(place_code);
+	    travel.setGroup_Code(group_Code);
+	    travel.setTravel_Date(travel_Date);
+	      
+	    System.out.println("DdD"+travel.getGroup_Code()) ;
+	   
+	    System.out.println(travel.getPlace_code()) ;
+	      
+	    service1.create(travel) ;
+	      
+	}
+	   
+	@ResponseBody
+	@RequestMapping (value="planDayList" , method=RequestMethod.POST)
+	public void planList(String plan, String group , TravelListVO travel) throws Exception{
+      
+		int group_Code = Integer.parseInt(group) ;
+		Date travel_Date = Date.valueOf(plan) ;
+      
+		travel.setGroup_Code(group_Code);
+		travel.setTravel_Date(travel_Date);
+      
+		System.out.println("DdD"+travel.getGroup_Code()) ;
+   
+		System.out.println(travel.getPlace_code()) ;
+      
+   }
+
 	
 }

@@ -19,9 +19,9 @@ public class LoginController {
 	@Inject
 	private MemberService service;
 	
-	// ·Î±×ÀÎ Á¤º¸ ¾ÆÀÌµğ & ÆĞ½º¿öµå Ã¼Å© (³»ºÎÃ³¸®)
+	// ë¡œê·¸ì¸ ì •ë³´ ì•„ì´ë”” & íŒ¨ìŠ¤ì›Œë“œ ì²´í¬ (ë‚´ë¶€ì²˜ë¦¬)
 	@RequestMapping(value="user_check")
-	@ResponseBody // È¸¿ø ·Î±×ÀÎÁ¤º¸È®ÀÎ (³»ºÎÃ³¸®)
+	@ResponseBody // íšŒì› ë¡œê·¸ì¸ì •ë³´í™•ì¸ (ë‚´ë¶€ì²˜ë¦¬)
 	public String userConfirm(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
@@ -40,32 +40,44 @@ public class LoginController {
 		return value;
 	}
 	
-	// ·Î±×ÀÎ ÆûÀÌµ¿ 
+	// ë¡œê·¸ì¸ í¼ì´ë™ 
 	@RequestMapping(value="login", method = RequestMethod.GET)
 	public String loginForm(HttpServletRequest request, HttpServletResponse response) {
 		
 		HttpSession session = request.getSession();
 		
 		String info = (String)session.getAttribute("info");
-		// ·Î±×ÀÎÈÄ ´Ù½Ã ·Î±×ÀÎÃ¢À¸·Î ÀÌµ¿ÇÒ½Ã
-		if(info == "admin") { // °ü¸®ÀÚ  
+		// ë¡œê·¸ì¸í›„ ë‹¤ì‹œ ë¡œê·¸ì¸ì°½ìœ¼ë¡œ ì´ë™í• ì‹œ
+		if(info == "admin") { // ê´€ë¦¬ì  
 			return "mHome";
 		}
-		else if (info == "user"){ // ÀÏ¹İÈ¸¿ø
+		else if (info == "user"){ // ì¼ë°˜íšŒì›
 			return "uHome";
 		}
 		
 		return "loginForm/login";
 	}
 	
-	// ¸ŞÀÎÆäÀÌÁö ÀÌµ¿ ÄÁÆ®·Ñ·¯
+	// ë©”ì¸í˜ì´ì§€ ì´ë™ ì»¨íŠ¸ë¡¤ëŸ¬
 	@RequestMapping(value="main", method = RequestMethod.GET)
-	public String layoutForm() {
+	public String layoutForm(HttpServletRequest request, HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		
+		String info = (String)session.getAttribute("info");
+		// ë¡œê·¸ì¸í›„ ë‹¤ì‹œ ë¡œê·¸ì¸ì°½ìœ¼ë¡œ ì´ë™í• ì‹œ
+		if(info == "admin") { // ê´€ë¦¬ì  
+			return "mHome";
+		}
+		else if (info == "user"){ // ì¼ë°˜íšŒì›
+			return "uHome";
+		}
+		
 		return "layout";
 	}
 	
-	//·Î±×ÀÎ Á¤º¸Àü¼Û ¼¼¼ÇÈ°¼ºÈ­ 
-	@RequestMapping (value="main", method=RequestMethod.POST) // ·Î±×ÀÎÀÌµ¿
+	//ë¡œê·¸ì¸ ì •ë³´ì „ì†¡ ì„¸ì…˜í™œì„±í™” 
+	@RequestMapping (value="main", method=RequestMethod.POST) // ë¡œê·¸ì¸ì´ë™
 	public String Login(HttpServletRequest request, HttpServletResponse response, MemberVO mem) throws Exception {
 		
 		HttpSession session = request.getSession();
@@ -73,13 +85,13 @@ public class LoginController {
 		String id = mem.getUser_id();
 		session.setAttribute("mem", mem);
 		
-		if(id.equals("manager")) { // ¸Å´ÏÀú ·Î±×ÀÎ 
-			session.setAttribute("info", "admin"); // °ü¸®ÀÚ jstlÁ¤º¸
+		if(id.equals("manager")) { // ë§¤ë‹ˆì € ë¡œê·¸ì¸ 
+			session.setAttribute("info", "admin"); // ê´€ë¦¬ì jstlì •ë³´
 			return "mHome";
 		}
 		
-		// ÀÏ¹İÈ¸¿ø ·Î±×ÀÎ
-		session.setAttribute("info", "user"); // À¯Àú jstlÁ¤º¸
+		// ì¼ë°˜íšŒì› ë¡œê·¸ì¸
+		session.setAttribute("info", "user"); // ìœ ì € jstlì •ë³´
 		return "uHome";
 	}
 	
@@ -88,8 +100,8 @@ public class LoginController {
 		
 		HttpSession session = request.getSession();
 		
-		session.invalidate(); // ¼¼¼Ç ·Î±×¾Æ¿ô
+		session.invalidate(); // ì„¸ì…˜ ë¡œê·¸ì•„ì›ƒ
 		
-		return "redirect:login"; // ·Î±×¾Æ¿ôÇßÀ»½Ã ·Î±×¾Æ¿ô º§·ù¿¡¼­ ´Ù½Ã ·Î±×ÀÎ º§·ù·Î ¸®´ÙÀÌ·ºÆ® 
+		return "redirect:login"; // ë¡œê·¸ì•„ì›ƒí–ˆì„ì‹œ ë¡œê·¸ì•„ì›ƒ ë²¨ë¥˜ì—ì„œ ë‹¤ì‹œ ë¡œê·¸ì¸ ë²¨ë¥˜ë¡œ ë¦¬ë‹¤ì´ë ‰íŠ¸ 
 	}
 }

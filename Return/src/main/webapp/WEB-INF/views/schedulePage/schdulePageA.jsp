@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script src="./resources/js/schedule/schedule.js"/></script>
+<script src="./resources/js/jquery-ui-1.10.4.custom.js" /></script>
+<script src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Ao5To6qq05xL8fmhSOTK&callback=initMap"></script>
 <div id="header" class="clearfix bg-dark">
 	<!-- TOP NAV -->
 	<header id="topNav">
@@ -46,7 +48,7 @@
 <div class="wrapper">
 	<div id="mainMenu" class="sidebar-vertical sidebar-dark turn-scroll-auto turn-a">
 		<div class="sidebar-nav">
-			<div class="navbar navbar-default" role="navigation">
+			<div class="navbar navbar-default turn-bottom-zero" role="navigation">
 			
 				<!--.nav-collapse -->
 				<div class="navbar-collapse sidebar-navbar-collapse collapse" aria-expanded="false">
@@ -57,6 +59,7 @@
 							<div>
 								<label class="text-center turn-font-set dateName">${scheduleDate}</label>
 							</div>
+							<div id="groupCode" style="display:none">${groupCode}</div>
 						</li>
 					</ul>
 					<!-- /MENU -->
@@ -106,13 +109,13 @@
 	
 	<div id="mainMenu" class="sidebar-vertical sidebar-dark turn-scroll-auto turn-b">
 		<div class="sidebar-nav">
-			<div class="navbar navbar-default" role="navigation">
+			<div class="navbar navbar-default turn-bottom-zero" role="navigation">
 			
 				<!--.nav-collapse -->
 				<div class="navbar-collapse sidebar-navbar-collapse collapse">
 
 					<!-- MENU -->
-					<ul class="nav navbar-nav turn-nav">
+					<ul class="nav navbar-nav turn-nav selectPlace" style="height:853px;">
 						<li class="turn-border-bottom">
 							<div>
 								<label class="text-center turn-font-set dayChoose"></label>
@@ -125,6 +128,7 @@
 				<!--/.nav-collapse -->
 
 			</div>
+			
 		</div>
 
 	</div>	
@@ -165,41 +169,29 @@
 	
 	
 	<section id="slider" class="heightfull">
-		<div id="google_map" style="width:100%; height:853px;"></div>
+		<div id="mapArea" style="width:100%; height:853px;"></div>
 	</section>
 	
-	<script>
-	var map;
-	
-	// var lat = document.getElementById("lat").innerHTML;
-	// var lng = document.getElementById("lng").innerHTML;
-	
-	function initialize() {
-	
-	  var mapOptions = { //구글 맵 옵션 설정
-	      zoom : 16, //기본 확대율
-	      center : new google.maps.LatLng(36.767355, 128.075525), // 지도 중앙 위치
-	      scrollwheel : true, //마우스 휠로 확대 축소 사용 여부
-	      mapTypeControl : true //맵 타입 컨트롤 사용 여부
-	  };
-	
-	  map = new google.maps.Map(document.getElementById('google_map'), mapOptions); //구글 맵을 사용할 타겟
-	  
-	  var image = './resources/img/placeholder.png'; //마커 이미지 설정
-	
-	  var marker = new google.maps.Marker({ //마커 설정
-	      map : map,
-	      position : map.getCenter(), //마커 위치
-	      icon : image //마커 이미지
-	  });
-	
-	  google.maps.event.addDomListener(window, "resize", function() { //리사이즈에 따른 마커 위치
-	      var center = map.getCenter();
-	      google.maps.event.trigger(map, "resize");
-	      map.setCenter(center); 
-	  });
-	
-	}
+	 <script>
+		 var map = null;
+		 var marker = null;
+		 var cityhall = null;
+		
+		 function initMap() {
+		    cityhall = new naver.maps.LatLng(37.338337, 127.110111);
+		
+		    map = new naver.maps.Map('mapArea', {
+		       center : cityhall,
+		       zoom : 10
+		    });
+		
+		    marker = new naver.maps.Marker({
+		       map : map,
+		       position : cityhall
+		    });
+		
+		 };
+		
 	</script>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAF8iTF3JtdLLhprWyASWE8APl6RM6BGBQ&callback=initialize"></script>
+	
 </div>

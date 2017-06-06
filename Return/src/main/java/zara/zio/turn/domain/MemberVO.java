@@ -4,14 +4,14 @@ import java.sql.Timestamp;
 
 public class MemberVO {
 
-	private String user_id; // È¸¿ø ¾ÆÀÌµğ 
-	private String user_pass; // È¸¿ø ÆĞ½º¿öµå
-	private String user_birth; // È¸¿ø »ı³â¿ùÀÏ 
-	private int user_gender; // È¸¿ø¼ºº°
-	private String user_phone; // È¸¿ø Æù³Ñ¹ö
-	private String user_email; // È¸¿ø ÀÌ¸ŞÀÏ
-	private Timestamp user_date; // È¸¿ø°¡ÀÔÀÏÀÚ 
-	private String yyyy, mm, dd; //»ı³â¿ùÀÏ
+	private String user_id; // íšŒì› ì•„ì´ë”” 
+	private String user_pass; // íšŒì› íŒ¨ìŠ¤ì›Œë“œ
+	private String user_birth; // íšŒì› ìƒë…„ì›”ì¼ 
+	private int user_gender; // íšŒì›ì„±ë³„
+	private String user_phone; // íšŒì› í°ë„˜ë²„
+	private String user_email; // íšŒì› ì´ë©”ì¼
+	private Timestamp user_date; // íšŒì›ê°€ì…ì¼ì 
+	private String yyyy, mm, dd; //ìƒë…„ì›”ì¼
 	
 	public String getUser_id() {
 		return user_id;
@@ -75,13 +75,13 @@ public class MemberVO {
 	}
 	
 	public String toString() {
-		return "( È¸¿ø¾ÆÀÌµğ : " + user_id + 
-				" È¸¿øÆĞ½º¿öµå : " + user_pass + 
-				" È¸¿ø»ıÀÏ : " + user_birth + 
-				" È¸¿ø¼ºº° : " + user_gender + 
-				" È¸¿øÆù³Ñ¹ö : " + user_phone + 
-				" È¸¿øÀÌ¸ŞÀÏ : " + user_email + 
-				" È¸¿ø°¡ÀÔÀÏÀÚ : " + user_date + " )";
+		return "( íšŒì›ì•„ì´ë”” : " + user_id + 
+				" íšŒì›íŒ¨ìŠ¤ì›Œë“œ : " + user_pass + 
+				" íšŒì›ìƒì¼ : " + user_birth + 
+				" íšŒì›ì„±ë³„ : " + user_gender + 
+				" íšŒì›í°ë„˜ë²„ : " + user_phone + 
+				" íšŒì›ì´ë©”ì¼ : " + user_email + 
+				" íšŒì›ê°€ì…ì¼ì : " + user_date + " )";
 	}
 	
 }

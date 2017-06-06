@@ -55,14 +55,4 @@
 	<!-- SCROLL TO TOP -->
 	<a href="#" id="toTop"></a>
 	
-	<!-- JAVASCRIPT FILES -->
-	<script type="text/javascript">var plugin_path = './resources/';</script>
-	<script type="text/javascript" src="./resources/libraryJs/sliderJs/jquery-2.2.3.min.js"></script>
-	<script type="text/javascript" src="./resources/libraryJs/sliderJs/scripts.js"></script>
-		
-	<!-- REVOLUTION SLIDER -->
-	<script type="text/javascript" src="./resources/libraryJs/sliderPlugin/jquery.themepunch.tools.min.js"></script>
-	<script type="text/javascript" src="./resources/libraryJs/sliderPlugin/jquery.themepunch.revolution.min.js"></script>
-	<script type="text/javascript" src="./resources/libraryJs/sliderJs/demo.revolution_slider.js"></script>
-	
 </div>

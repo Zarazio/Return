@@ -98,6 +98,10 @@
 							</label>
 							</p>
 							<p>
+								<input type="text" class="form-control text-center" name="travel_Title"
+								placeholder="여행 제목을 작성해주세요" value="">
+							</p>
+							<p>
 								<input type="text" class="form-control text-center rangepicker" name="scheduleDate"
 								data-format="yyyy-mm-dd" placeholder="시작일자 - 종료일자 " value="">
 							</p>
@@ -164,7 +168,7 @@
 							<a href="#">
 								<img src="http://placehold.it/45x45" width="45" height="45" alt="">
 								<h6>
-									<span>test  :  </span> good!!! a<br>ddddddㅁㄴㅇㅁㄴㅇㅁㄴㅇ
+									<span>test  :  </span> good!!! a<br>안녕하세요~
 								</h6>
 							</a>
 						</div>
@@ -172,9 +176,8 @@
 							<a href="#">
 								<img src="http://placehold.it/45x45" width="45" height="45" alt="">
 								<h6>
-									<span>test  :  </span> good!!! a
-									<br>ddddddㅁㄴㅇㅁㄴㅇㄴㅁㅇ
-									<br>asdasdsadsadasdsadasd
+									<span>test  :  </span> 여행의시작
+									<br>재밌는여행 
 								</h6>
 							</a>
 						</div>

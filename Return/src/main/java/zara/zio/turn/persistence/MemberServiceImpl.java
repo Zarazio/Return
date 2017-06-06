@@ -19,7 +19,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void regist(MemberVO vo) throws Exception {
 		// TODO Auto-generated method stub'
-		System.out.println("service¿È");
+		System.out.println("serviceì˜´");
 		dao.user_create(vo);
 	}
 
@@ -50,7 +50,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int confirm(String id) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("Serviceµå°¨"+id);
+		System.out.println("Serviceë“œê°"+id);
 		return dao.id_confirm(id);
 	}
 

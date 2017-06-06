@@ -15,16 +15,16 @@ public class EchoHandler extends TextWebSocketHandler {
     
     private static Logger logger = LoggerFactory.getLogger(EchoHandler.class);
     
-    //¸ğµç ¼¼¼ÇÀ» ÀúÀåÇÑ´Ù
-    //¹æ¹ı1 Map
+    //ëª¨ë“  ì„¸ì…˜ì„ ì €ì¥í•œë‹¤
+    //ë°©ë²•1 Map
     //private Map <String,WebSocketSession> sessions = new HashMap<String, WebSocketSession>();
     
-    //¹æ¹ı2 List //´ÜÃ¼Ã¤ÆÃ//´©°¡¾´Áö¸ğ¸§
+    //ë°©ë²•2 List //ë‹¨ì²´ì±„íŒ…//ëˆ„ê°€ì“´ì§€ëª¨ë¦„
     private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
     
     
     /**
-     * Å¬¶óÀÌ¾ğÆ® ¿¬°á ÀÌÈÄ¿¡ ½ÇÇàµÇ´Â ¸Ş¼Òµå
+     * í´ë¼ì´ì–¸íŠ¸ ì—°ê²° ì´í›„ì— ì‹¤í–‰ë˜ëŠ” ë©”ì†Œë“œ
      */
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -35,16 +35,16 @@ public class EchoHandler extends TextWebSocketHandler {
         logger.info(" {} conntected ", session.getId());
     }
     /**
-     * Å¬¶óÀÌ¾ğÆ®°¡ À¥¼ÒÄÏ ¼­¹ö·Î ¸Ş½ÃÁö¸¦ Àü¼ÛÇßÀ» ¶§ ½ÇÇàµÇ´Â ¸Ş¼Òµå
+     * í´ë¼ì´ì–¸íŠ¸ê°€ ì›¹ì†Œì¼“ ì„œë²„ë¡œ ë©”ì‹œì§€ë¥¼ ì „ì†¡í–ˆì„ ë•Œ ì‹¤í–‰ë˜ëŠ” ë©”ì†Œë“œ
      */
     @Override
     protected void handleTextMessage(WebSocketSession session,
             TextMessage message) throws Exception {
         System.out.println("dasdas");
-        //¾Æ·¡¿Í °°ÀÌ´Â ÃÖ´ë 2°³
+        //ì•„ë˜ì™€ ê°™ì´ëŠ” ìµœëŒ€ 2ê°œ
         logger.info("From {}, recieved Message : {} ", session.getId(), message.getPayload() );
                 
-        //¿¬°áµÇ¾îÀÖ´Â ¸ğµç Å¬¶óÀÌ¾ğÆ®µé¿¡°Ô ¸Ş½ÃÁö¸¦ Àü¼ÛÇÑ´Ù
+        //ì—°ê²°ë˜ì–´ìˆëŠ” ëª¨ë“  í´ë¼ì´ì–¸íŠ¸ë“¤ì—ê²Œ ë©”ì‹œì§€ë¥¼ ì „ì†¡í•œë‹¤
         //2 List
         for(WebSocketSession sess : sessionList){
             sess.sendMessage(new TextMessage(session.getId() +": " + message.getPayload() ));
@@ -62,7 +62,7 @@ public class EchoHandler extends TextWebSocketHandler {
     }
     
     /**
-     * Å¬¶óÀÌ¾ğÆ®°¡ ¿¬°áÀ» ²÷¾úÀ» ¶§ ½ÇÇàµÇ´Â ¸Ş¼Òµå
+     * í´ë¼ì´ì–¸íŠ¸ê°€ ì—°ê²°ì„ ëŠì—ˆì„ ë•Œ ì‹¤í–‰ë˜ëŠ” ë©”ì†Œë“œ
      */
     @Override
     public void afterConnectionClosed(WebSocketSession session,

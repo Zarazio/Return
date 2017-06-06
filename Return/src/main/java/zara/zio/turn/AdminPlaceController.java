@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.IOUtils; // ½ÇÁ¦ µ¥ÀÌÅÍ¸¦ ÀĞ´Â ¶óÀÌºê·¯¸® 
+import org.apache.commons.io.IOUtils; // ì‹¤ì œ ë°ì´í„°ë¥¼ ì½ëŠ” ë¼ì´ë¸ŒëŸ¬ë¦¬ 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -42,7 +42,7 @@ public class AdminPlaceController {
 	@Inject
 	private PlaceService service;
 	
-	// °æ·Î ÁöÁ¤ path
+	// ê²½ë¡œ ì§€ì • path
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
@@ -55,13 +55,13 @@ public class AdminPlaceController {
 		placeVO.setPlace_content(text);
 				
 		if(cookieFile != null) {
-			service.pimg_delete(no); // dbÁ¤º¸ »èÁ¦
+			service.pimg_delete(no); // dbì •ë³´ ì‚­ì œ
 			for(int i=0; i<cookieFile.length; i++) {
-				deleteFile(cookieFile[i]); // ¾÷·Îµå °æ·Î»èÁ¦ 
+				deleteFile(cookieFile[i]); // ì—…ë¡œë“œ ê²½ë¡œì‚­ì œ 
 			}
 		}
 		
-		service.place_update(placeVO, no); // Á¤º¸¾÷µ¥ÀÌÆ®
+		service.place_update(placeVO, no); // ì •ë³´ì—…ë°ì´íŠ¸
 		System.out.println(placeVO);
 		
 		List<PlaceVO> list = new ArrayList<PlaceVO>();
@@ -69,24 +69,24 @@ public class AdminPlaceController {
 		
 		for(int i=0; i<maps.length; i++) {
 			PlaceVO place = new PlaceVO();
-			subr = maps[i].indexOf("_") + 1; // ¹®ÀÚ¿­ÀÚ¸£°Ô
+			subr = maps[i].indexOf("_") + 1; // ë¬¸ìì—´ìë¥´ê²Œ
 			
 			place.setPlace_code(no);
 			place.setImg_code(i);
 			place.setPlace_img(maps[i]);
 			place.setFile_name(maps[i].substring(subr));
-			System.out.println("Á¤º¸ : "+ maps[i].substring(subr));
+			System.out.println("ì •ë³´ : "+ maps[i].substring(subr));
 			
 			list.add(place);
 		}
-		service.pimg_delete(no); // dbÁ¤º¸ »èÁ¦
-		service.img_insert(list); // ÀÌ¹ÌÁö ÀçÀü¼Û 
+		service.pimg_delete(no); // dbì •ë³´ ì‚­ì œ
+		service.img_insert(list); // ì´ë¯¸ì§€ ì¬ì „ì†¡ 
 		
-		// ÀÛ¼ºÇÑ ºä·Î ÀÌµ¿ 
-		PlaceVO place = service.read(no); // ÀÚ¹Ùºó °´Ã¼¸¦ ¹İÈ¯
+		// ì‘ì„±í•œ ë·°ë¡œ ì´ë™ 
+		PlaceVO place = service.read(no); // ìë°”ë¹ˆ ê°ì²´ë¥¼ ë°˜í™˜
 		list = service.readimg(no);
-		model.addAttribute("place", place); // ÇØ´çÁ¤º¸¹İÈ¯ 
-		model.addAttribute("list", list);// ÀÌ¹ÌÁö ¸®½ºÆ® ¹İÈ¯
+		model.addAttribute("place", place); // í•´ë‹¹ì •ë³´ë°˜í™˜ 
+		model.addAttribute("list", list);// ì´ë¯¸ì§€ ë¦¬ìŠ¤íŠ¸ ë°˜í™˜
 		
 		return "adminPage/uploadRead";
 	}
@@ -94,7 +94,7 @@ public class AdminPlaceController {
 	@RequestMapping(value="/uploadSet", method=RequestMethod.GET)
 	public String uploadSet(@RequestParam(value="no", defaultValue="-1") int no, @ModelAttribute Pagination pagination, Model model) throws Exception {
 		
-		PlaceVO place = service.read(no); // ÀÚ¹Ùºó °´Ã¼¸¦ ¹İÈ¯
+		PlaceVO place = service.read(no); // ìë°”ë¹ˆ ê°ì²´ë¥¼ ë°˜í™˜
 		List<PlaceVO> list = service.readimg(no);
 		model.addAttribute("place", place);
 		model.addAttribute("list", list);
@@ -105,12 +105,12 @@ public class AdminPlaceController {
 	@RequestMapping(value="/uploadDel", method=RequestMethod.GET)
 	public String uploadDel(String [] imgDel, int no) throws Exception{
 		
-		if(imgDel != null) { // ÀÌ¹ÌÁö°ªÀÌ ÀÖÀ»¶§ // ifÁ¶°ÇÀÌ ¾øÀ¸¸é exception¿À·ù    
+		if(imgDel != null) { // ì´ë¯¸ì§€ê°’ì´ ìˆì„ë•Œ // ifì¡°ê±´ì´ ì—†ìœ¼ë©´ exceptionì˜¤ë¥˜    
 			for(int i=0; i<imgDel.length; i++) { 
-				deleteFile(imgDel[i]); // Æú´õ»óÀÇ ÀÌ¹ÌÁö¸¦ Á¦°Å
+				deleteFile(imgDel[i]); // í´ë”ìƒì˜ ì´ë¯¸ì§€ë¥¼ ì œê±°
 			}
-		} // ÀÌ¹ÌÁö°ªÀÌ ¾øÀ»¶§ °Ç³Ê¶Ü 
-		// ÀÌ¹ÌÁö ÀÖÀ¸³ª ¾øÀ¸³ª »ó°ü¾øÀÌ Á¦°Å
+		} // ì´ë¯¸ì§€ê°’ì´ ì—†ì„ë•Œ ê±´ë„ˆëœ€ 
+		// ì´ë¯¸ì§€ ìˆìœ¼ë‚˜ ì—†ìœ¼ë‚˜ ìƒê´€ì—†ì´ ì œê±°
 		service.placeAll_delete(no);
 		
 		return "redirect:uploadList";
@@ -118,16 +118,16 @@ public class AdminPlaceController {
 	
 	@RequestMapping(value="/uploadRead", method=RequestMethod.GET)
 	public String uploadRead(@RequestParam(value="no", defaultValue="-1") int no, @ModelAttribute Pagination pagination, Model model) throws Exception {
-		// (read?bno=?? ¶ó´Â ÁÖ¼Ò·Î Á¢±ÙÇÑ´Ù.) 
-		PlaceVO place = service.read(no); // ÀÚ¹Ùºó °´Ã¼¸¦ ¹İÈ¯
+		// (read?bno=?? ë¼ëŠ” ì£¼ì†Œë¡œ ì ‘ê·¼í•œë‹¤.) 
+		PlaceVO place = service.read(no); // ìë°”ë¹ˆ ê°ì²´ë¥¼ ë°˜í™˜
 		List<PlaceVO> list = service.readimg(no);
-		model.addAttribute("place", place); // ÇØ´çÁ¤º¸¹İÈ¯ 
-		model.addAttribute("list", list);// ÀÌ¹ÌÁö ¸®½ºÆ® ¹İÈ¯
+		model.addAttribute("place", place); // í•´ë‹¹ì •ë³´ë°˜í™˜ 
+		model.addAttribute("list", list);// ì´ë¯¸ì§€ ë¦¬ìŠ¤íŠ¸ ë°˜í™˜
 		return "adminPage/uploadRead";
 		
 	}
 	
-	// ¾÷·ÎµåµÈ ÆäÀÌÁö ¸®½ºÆ® ¸ÊÇÎ
+	// ì—…ë¡œë“œëœ í˜ì´ì§€ ë¦¬ìŠ¤íŠ¸ ë§µí•‘
 	@RequestMapping(value="/uploadList", method=RequestMethod.GET)
 	public String uploadList(Model model, Pagination pagination) throws Exception {
 		
@@ -140,78 +140,78 @@ public class AdminPlaceController {
 		
 		int totalCount = service.getTotalCount();
 		
-		pagination.setTotalCount(totalCount); // pagination °è»ê
+		pagination.setTotalCount(totalCount); // pagination ê³„ì‚°
 		
 		return "adminPage/uploadList";
 	}
 	
-	// Ajax¾÷·Îµå ÆäÀÌÁö ¸ÊÇÎ
+	// Ajaxì—…ë¡œë“œ í˜ì´ì§€ ë§µí•‘
 	@RequestMapping(value="/upload", method=RequestMethod.GET)
 	public String uploadAjax() {
 		return "adminPage/upload";
 //		return "adminPage/handlebarTemple";
 	}
 	
-	// Ajax¾÷·Îµå Ã³¸® ¸ÅÇÎ
-    // ÆÄÀÏÀÇ ÇÑ±ÛÃ³¸® : produces="text/plain;charset=utf-8"
+	// Ajaxì—…ë¡œë“œ ì²˜ë¦¬ ë§¤í•‘
+    // íŒŒì¼ì˜ í•œê¸€ì²˜ë¦¬ : produces="text/plain;charset=utf-8"
 	@RequestMapping(value="/upload", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {
 		
-		logger.info("OriginalName : " + file.getOriginalFilename()); // ÆÄÀÏÀÌ¸§ 
-//		logger.info("Size : " + file.getSize()); // ÆÄÀÏ»çÀÌÁî 
-//		logger.info("ContentType : " + file.getContentType()); // ÆÄÀÏÅ¸ÀÔ jpg, png
+		logger.info("OriginalName : " + file.getOriginalFilename()); // íŒŒì¼ì´ë¦„ 
+//		logger.info("Size : " + file.getSize()); // íŒŒì¼ì‚¬ì´ì¦ˆ 
+//		logger.info("ContentType : " + file.getContentType()); // íŒŒì¼íƒ€ì… jpg, png
 		
 		return new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.CREATED);
 	}
 	
 	
-	// ÀÌ¹ÌÁö Ç¥½Ã ¸ÊÇÎ
+	// ì´ë¯¸ì§€ í‘œì‹œ ë§µí•‘
 	@ResponseBody
 	@RequestMapping("/displayFile") 
 	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception {
-		// ¼­¹öÀÇ ÆÄÀÏÀ» ´Ù¿î·ÎµåÇÏ±â À§ÇÑ ½ºÆ®¸²
+		// ì„œë²„ì˜ íŒŒì¼ì„ ë‹¤ìš´ë¡œë“œí•˜ê¸° ìœ„í•œ ìŠ¤íŠ¸ë¦¼
 		InputStream in = null; // java.io
 		ResponseEntity<byte[]> entity = null;
 		
 		logger.info("Display FILE NAME : " + fileName);
 		
 		try {
-			// È®ÀåÀÚ¸¦ ÃßÃâÇÏ¿© formatName¿¡ ÀúÀå
+			// í™•ì¥ìë¥¼ ì¶”ì¶œí•˜ì—¬ formatNameì— ì €ì¥
 			String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
 			
-			// ÃßÃâÇÑ È®ÀåÀÚ¸¦ MediaUtilsÅ¬·¡½º¿¡¼­  ÀÌ¹ÌÁöÆÄÀÏ¿©ºÎ¸¦ °Ë»çÇÏ°í ¸®ÅÏ¹Ş¾Æ mType¿¡ ÀúÀå
+			// ì¶”ì¶œí•œ í™•ì¥ìë¥¼ MediaUtilsí´ë˜ìŠ¤ì—ì„œ  ì´ë¯¸ì§€íŒŒì¼ì—¬ë¶€ë¥¼ ê²€ì‚¬í•˜ê³  ë¦¬í„´ë°›ì•„ mTypeì— ì €ì¥
 			MediaType mType = MediaUtils.getMediaType(formatName);
 			
-			// Çì´õ ±¸¼º °´Ã¼(¿ÜºÎ¿¡¼­ µ¥ÀÌÅÍ¸¦ ÁÖ°í¹ŞÀ» ¶§¿¡´Â header¿Í body¸¦ ±¸¼ºÇØ¾ßÇÏ±â ¶§¹®¿¡)
+			// í—¤ë” êµ¬ì„± ê°ì²´(ì™¸ë¶€ì—ì„œ ë°ì´í„°ë¥¼ ì£¼ê³ ë°›ì„ ë•Œì—ëŠ” headerì™€ bodyë¥¼ êµ¬ì„±í•´ì•¼í•˜ê¸° ë•Œë¬¸ì—)
 			HttpHeaders headers = new HttpHeaders();
 			
-			 // InputStream »ı¼º
+			 // InputStream ìƒì„±
 			in = new FileInputStream(uploadPath+fileName);
 			
-			if(mType != null) { // ÀÌ¹ÌÁö ÆÄÀÏÀÏ¶§ 
+			if(mType != null) { // ì´ë¯¸ì§€ íŒŒì¼ì¼ë•Œ 
 				headers.setContentType(mType);
-			} else { // ÀÌ¹ÌÁöÆÄÀÏÀÌ ¾Æ´Ò¶§
+			} else { // ì´ë¯¸ì§€íŒŒì¼ì´ ì•„ë‹ë•Œ
 				fileName = fileName.substring(fileName.indexOf("_")+1);
 				
-				// ´Ù¿î·Îµå¿ë ÄÁÅÙÆ® Å¸ÀÔÁöÁ¤ application/octet-stream 
+				// ë‹¤ìš´ë¡œë“œìš© ì»¨í…íŠ¸ íƒ€ì…ì§€ì • application/octet-stream 
 				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 				
-				// ¹ÙÀÌÆ®¹è¿­À» ½ºÆ®¸µÀ¸·Î : 
-				// new String(fileName.getBytes("utf-8"),"iso-8859-1") * iso-8859-1 ¼­À¯·´¾ğ¾î, Å« µû¿ÈÇ¥ ³»ºÎ¿¡  " \" ³»¿ë \" "
-                // ÆÄÀÏÀÇ ÇÑ±Û ±úÁü ¹æÁö
+				// ë°”ì´íŠ¸ë°°ì—´ì„ ìŠ¤íŠ¸ë§ìœ¼ë¡œ : 
+				// new String(fileName.getBytes("utf-8"),"iso-8859-1") * iso-8859-1 ì„œìœ ëŸ½ì–¸ì–´, í° ë”°ì˜´í‘œ ë‚´ë¶€ì—  " \" ë‚´ìš© \" "
+                // íŒŒì¼ì˜ í•œê¸€ ê¹¨ì§ ë°©ì§€
 				headers.add("Content-Disposition", "attachment; filename=\"" + 
 					new String(fileName.getBytes("UTF-8"), "ISO-8859-1")+"\""); 
 				//headers.add("Content-Disposition", "attachment; filename='"+fileName+"'");
 			}
 			
-			// ¹ÙÀÌÆ® ¹è¿­, Çì´õ, HTTP »óÅÂÄÚµå 
-			// ´ë»óÆÄÀÏ¿¡¼­ µ¥ÀÌÅÍ¸¦ ÀĞ¾î³»´Â IOUtilsÀÇ toByteArray()¸Ş¼Òµå 
+			// ë°”ì´íŠ¸ ë°°ì—´, í—¤ë”, HTTP ìƒíƒœì½”ë“œ 
+			// ëŒ€ìƒíŒŒì¼ì—ì„œ ë°ì´í„°ë¥¼ ì½ì–´ë‚´ëŠ” IOUtilsì˜ toByteArray()ë©”ì†Œë“œ 
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED); 
 				
 		} catch(Exception e) {
 			e.printStackTrace();
 			
-			// HTTP»óÅÂ ÄÚµå()
+			// HTTPìƒíƒœ ì½”ë“œ()
 			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
 		} finally {
 			in.close();
@@ -219,32 +219,32 @@ public class AdminPlaceController {
 		return entity;
 	}
 	
-	// Ã·ºÎÆÄÀÏ »èÁ¦ ¸ÊÇÎ 
+	// ì²¨ë¶€íŒŒì¼ ì‚­ì œ ë§µí•‘ 
 	@ResponseBody
 	@RequestMapping(value="/deleteFile", method=RequestMethod.POST)
 	public ResponseEntity<String> deleteFile(String fileName) {
 		
 		logger.info("delete file : " + fileName);
 		
-		// ÆÄÀÏÀÇ È®ÀåÀÚ ÃßÃâ
+		// íŒŒì¼ì˜ í™•ì¥ì ì¶”ì¶œ
 		String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
 		
-		// ÀÌ¹ÌÁö ÆÄÀÏ ¿©ºÎ °Ë»ç
+		// ì´ë¯¸ì§€ íŒŒì¼ ì—¬ë¶€ ê²€ì‚¬
 		MediaType mType = MediaUtils.getMediaType(formatName);
 		
-		// ÀÌ¹ÌÁöÀÇ °æ¿ì(½æ³×ÀÏ + ¿øº»ÆÄÀÏ »èÁ¦), ÀÌ¹ÌÁö°¡ ¾Æ´Ï¸é ¿øº»ÆÄÀÏ¸¸ »èÁ¦
-        // ÀÌ¹ÌÁö ÆÄÀÏÀÌ¸é
+		// ì´ë¯¸ì§€ì˜ ê²½ìš°(ì¸ë„¤ì¼ + ì›ë³¸íŒŒì¼ ì‚­ì œ), ì´ë¯¸ì§€ê°€ ì•„ë‹ˆë©´ ì›ë³¸íŒŒì¼ë§Œ ì‚­ì œ
+        // ì´ë¯¸ì§€ íŒŒì¼ì´ë©´
 		if(mType != null) {
 			String che = "/" + fileName.substring(3);
-			// ½æ³×ÀÏ ÀÌ¹ÌÁö »èÁ¦
+			// ì¸ë„¤ì¼ ì´ë¯¸ì§€ ì‚­ì œ
 			
 			new File(uploadPath + (che).replace('/', File.separatorChar)).delete();
 		} 
-		// ¿øº» ÆÄÀÏ »èÁ¦
+		// ì›ë³¸ íŒŒì¼ ì‚­ì œ
 
 		new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
 		
-		// µ¥ÀÌÅÍ¿Í http »óÅÂ ÄÚµå Àü¼Û
+		// ë°ì´í„°ì™€ http ìƒíƒœ ì½”ë“œ ì „ì†¡
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 		
 	}
@@ -257,28 +257,28 @@ public class AdminPlaceController {
 		String text = placeVO.getPlace_content().replaceAll("(\r\n|\r|\n|\n\r)", "<br>");
 		placeVO.setPlace_content(text);
 		
-		service.place_insert(placeVO); // Á¤º¸ Àü¼Û    
-		int max = service.place_max();// ¸Æ½º°ªÀ» ¹Ş¾Æ¿È
+		service.place_insert(placeVO); // ì •ë³´ ì „ì†¡    
+		int max = service.place_max();// ë§¥ìŠ¤ê°’ì„ ë°›ì•„ì˜´
 		
 		List<PlaceVO> list = new ArrayList<PlaceVO>();
 		int subr = 0;
 		
 		for(int i=0; i<maps.length; i++) {
 			PlaceVO place = new PlaceVO();
-			subr = maps[i].indexOf("_") + 1; // ¹®ÀÚ¿­ÀÚ¸£°Ô
+			subr = maps[i].indexOf("_") + 1; // ë¬¸ìì—´ìë¥´ê²Œ
 			
 			place.setPlace_code(max);
 			place.setImg_code(i);
 			place.setPlace_img(maps[i]);
 			place.setFile_name(maps[i].substring(subr));
-			System.out.println("Á¤º¸ : "+ maps[i].substring(subr));
+			System.out.println("ì •ë³´ : "+ maps[i].substring(subr));
 			
 			list.add(place);
 		}
-		service.img_insert(list); // ÀÌ¹ÌÁö Àü¼Û 
+		service.img_insert(list); // ì´ë¯¸ì§€ ì „ì†¡ 
 		
 		
-		return "redirect:uploadList"; // ¸®½ºÆ®·Î ¸®ÅÏ.
+		return "redirect:uploadList"; // ë¦¬ìŠ¤íŠ¸ë¡œ ë¦¬í„´.
 	}
 
 }

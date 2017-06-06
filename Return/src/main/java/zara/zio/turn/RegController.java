@@ -44,13 +44,13 @@ public class RegController {
 	@Inject
 	private MemberService service;
 	
-	// È¸¿ø°¡ÀÔ ÆûÀÌµ¿ 
+	// íšŒì›ê°€ì… í¼ì´ë™ 
 	@RequestMapping(value="register", method = RequestMethod.GET)
 	public String registerForm() {
 		return "registerForm/register";
 	}
 	
-	// È¸¿ø°¡ÀÔ Á¤º¸ÀÔ·Â Àü¼Û
+	// íšŒì›ê°€ì… ì •ë³´ì…ë ¥ ì „ì†¡
 	@RequestMapping(value="register", method=RequestMethod.POST)
 	public String create(MemberVO mem) throws Exception {
 		String yyyy = mem.getYyyy();
@@ -63,15 +63,15 @@ public class RegController {
 		
 	}
 	
-	// µî·ÏÀ» ÇÏ°í ´Ù½Ã »õ·Î°íÄ§ÇÏ¿´À»¶§ ³²¾ÆÀÖ´Â ÁÖ¼ÒÁ¤º¸¸¦ ÃÊ±âÈ­ 
+	// ë“±ë¡ì„ í•˜ê³  ë‹¤ì‹œ ìƒˆë¡œê³ ì¹¨í•˜ì˜€ì„ë•Œ ë‚¨ì•„ìˆëŠ” ì£¼ì†Œì •ë³´ë¥¼ ì´ˆê¸°í™” 
     //	@RequestMapping(value="success")
 	//	public String regResult() {
 	//		return "registerForm/success";
 	//	}
 	
-	// ¾ÆÀÌµğ Áßº¹Ã¼Å© (³»ºÎÃ³¸®)
+	// ì•„ì´ë”” ì¤‘ë³µì²´í¬ (ë‚´ë¶€ì²˜ë¦¬)
 	@RequestMapping(value="confirm")
-	@ResponseBody // µî·Ï½Ã ¾ÆÀÌµğÁßº¹È®ÀÎ (³»ºÎÃ³¸®)
+	@ResponseBody // ë“±ë¡ì‹œ ì•„ì´ë””ì¤‘ë³µí™•ì¸ (ë‚´ë¶€ì²˜ë¦¬)
 	public String idConfirm(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
 		System.out.println(id);

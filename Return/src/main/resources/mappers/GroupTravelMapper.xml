@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zara.zio.groupTravelMapper">
+	<!-- Group 단  -->
+	
+    <insert id="group_insert">
+      insert into travel_group (travel_Title, start_Date, end_Date)
+      values(#{travel_Title}, #{start_Date} , #{end_Date})
+    </insert>
+   
+    <select id="groupCode" resultType="int">
+      select group_Code from travel_group where travel_Title = #{travel_Title} and start_Date = #{start_Date} and end_Date = #{end_Date}
+    </select>
+	   
+    <!-- Travel 단  -->
+    
+    <insert id="planList_insert">
+      insert into travel_List (travel_Date, place_code, group_Code)
+      values(#{travel_Date}, #{place_code} , #{group_Code})
+   </insert>
+   
+   <select id="planDayList" resultType="TravelListVO">
+      select       
+   </select>
+</mapper>

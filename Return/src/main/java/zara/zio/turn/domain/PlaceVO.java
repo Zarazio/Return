@@ -4,22 +4,22 @@ import java.sql.Timestamp;
 
 public class PlaceVO {
 	
-	// ÁÖ¼ÒÁ¤º¸
+	// ì£¼ì†Œì •ë³´
 	private int place_code;
-	private String place_name; // Àå¼ÒÀÌ¸§
-	private Timestamp add_date; // Ãß°¡µÈ³¯Â¥, »ı¼ºµÈ³¯Â¥
-	private String place_content; // Àå¼Ò³»¿ë
-	private String place_address; // Àå¼ÒÁÖ¼Ò 
-	private double place_lat; // Àå¼Ò À§µµ 
-	private double place_lng; // Àå¼Ò °æµµ 
-	private String place_type; // Àå¼Ò ºĞ·ù 
-	private int place_on; // Àå¼Ò ¿Â ¿ÀÇÁ enable, disable
+	private String place_name; // ì¥ì†Œì´ë¦„
+	private Timestamp add_date; // ì¶”ê°€ëœë‚ ì§œ, ìƒì„±ëœë‚ ì§œ
+	private String place_content; // ì¥ì†Œë‚´ìš©
+	private String place_address; // ì¥ì†Œì£¼ì†Œ 
+	private double place_lat; // ì¥ì†Œ ìœ„ë„ 
+	private double place_lng; // ì¥ì†Œ ê²½ë„ 
+	private String place_type; // ì¥ì†Œ ë¶„ë¥˜ 
+	private int place_on; // ì¥ì†Œ ì˜¨ ì˜¤í”„ enable, disable
 	
 	
-	// ÀÌ¹ÌÁöÁ¤º¸ 
-	private int img_code; // ÀÌ¹ÌÁö¼øÂ÷Á¤º¸
-	private String place_img; // ÆÄÀÏ°æ·Î
-	private String file_name; // ÆÄÀÏÀÌ¸§
+	// ì´ë¯¸ì§€ì •ë³´ 
+	private int img_code; // ì´ë¯¸ì§€ìˆœì°¨ì •ë³´
+	private String place_img; // íŒŒì¼ê²½ë¡œ
+	private String file_name; // íŒŒì¼ì´ë¦„
 	
 	public int getImg_code() {
 		return img_code;
@@ -98,24 +98,24 @@ public class PlaceVO {
 	
 	
 //	private int place_code;
-//	private String place_name; // Àå¼ÒÀÌ¸§
-//	private Timestamp add_date; // Ãß°¡µÈ³¯Â¥, »ı¼ºµÈ³¯Â¥
-//	private String place_content; // Àå¼Ò³»¿ë
-//	private String place_address; // Àå¼ÒÁÖ¼Ò 
-//	private double place_lat; // Àå¼Ò À§µµ 
-//	private double place_lng; // Àå¼Ò °æµµ 
-//	private String place_type; // Àå¼Ò ºĞ·ù 
-//	private int place_on; // Àå¼Ò ¿Â ¿ÀÇÁ enable, disable
+//	private String place_name; // ì¥ì†Œì´ë¦„
+//	private Timestamp add_date; // ì¶”ê°€ëœë‚ ì§œ, ìƒì„±ëœë‚ ì§œ
+//	private String place_content; // ì¥ì†Œë‚´ìš©
+//	private String place_address; // ì¥ì†Œì£¼ì†Œ 
+//	private double place_lat; // ì¥ì†Œ ìœ„ë„ 
+//	private double place_lng; // ì¥ì†Œ ê²½ë„ 
+//	private String place_type; // ì¥ì†Œ ë¶„ë¥˜ 
+//	private int place_on; // ì¥ì†Œ ì˜¨ ì˜¤í”„ enable, disable
 	
 	
 	public String toString() {
-		return "( ÄÚµå : " + place_code + 
-				" Àå¼Ò³»¿ë : " + place_content + 
-				" Àå¼ÒÁÖ¼Ò : " + place_address + 
-				" À§µµ : " + place_lat + 
-				" °æµµ : " + place_lng + 
-				" Àå¼ÒºĞ·ù : " + place_type + 
-				" Àå¼Ò¿Â¿ÀÇÁ : " + place_on + " )";
+		return "( ì½”ë“œ : " + place_code + 
+				" ì¥ì†Œë‚´ìš© : " + place_content + 
+				" ì¥ì†Œì£¼ì†Œ : " + place_address + 
+				" ìœ„ë„ : " + place_lat + 
+				" ê²½ë„ : " + place_lng + 
+				" ì¥ì†Œë¶„ë¥˜ : " + place_type + 
+				" ì¥ì†Œì˜¨ì˜¤í”„ : " + place_on + " )";
 	}
 	
 }

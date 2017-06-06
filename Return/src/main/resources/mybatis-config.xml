@@ -4,6 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
+		<typeAlias alias="TravelListVO" type="zara.zio.turn.domain.TravelListVO" /> 
+		<typeAlias alias="GroupVO" type="zara.zio.turn.domain.GroupVO" /> 
 		<typeAlias alias="MemberVO" type="zara.zio.turn.domain.MemberVO" />
 		<typeAlias alias="PlaceVO" type="zara.zio.turn.domain.PlaceVO" /> 
 		<typeAlias alias="String" type="java.lang.String" /> 

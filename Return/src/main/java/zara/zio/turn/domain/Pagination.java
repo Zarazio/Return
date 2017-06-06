@@ -1,18 +1,18 @@
 package zara.zio.turn.domain;
 
 public class Pagination {
-	private int page = 1; // ÆäÀÌÁö 
+	private int page = 1; // í˜ì´ì§€ 
 	private int recordPage = 20; 
 	
 	public final static int DISPLAY_PAGE_NUM = 10;
-	private int startPage; // ½ÃÀÛÆäÀÌÁö
-	private int endPage; // Á¾·áÆäÀÌÁö
+	private int startPage; // ì‹œì‘í˜ì´ì§€
+	private int endPage; // ì¢…ë£Œí˜ì´ì§€
 	private boolean prev; 
 	private boolean next; 
 	private int totalCount;
 	
 
-	public int getTotalCount() { // ÀüÃ¼Ä«¿îÆ®
+	public int getTotalCount() { // ì „ì²´ì¹´ìš´íŠ¸
 		return totalCount;
 	}
 	public void setTotalCount(int totalCount) {
@@ -25,22 +25,22 @@ public class Pagination {
 	private void calculate() {
 		// TODO Auto-generated method stub
 		/*
-		 *  startPage, endPage, prev, next °è»êÇØÁÜ  
+		 *  startPage, endPage, prev, next ê³„ì‚°í•´ì¤Œ  
 		 *  
 		 */
-		// ¿£µå ÆäÀÌÁö °è»ê¹ı
+		// ì—”ë“œ í˜ì´ì§€ ê³„ì‚°ë²•
 		endPage = (int)Math.ceil(page/(double)DISPLAY_PAGE_NUM)*DISPLAY_PAGE_NUM;
 			
-		// ½ºÅ¸Æ® ÆäÀÌÁö °è»ê¹ı
+		// ìŠ¤íƒ€íŠ¸ í˜ì´ì§€ ê³„ì‚°ë²•
 		startPage = endPage-DISPLAY_PAGE_NUM + 1;
 		
-		// ³¡ÆäÀÌÁö °è»ê
+		// ëí˜ì´ì§€ ê³„ì‚°
 		int tempEndPage = (int)Math.ceil((double)totalCount/recordPage);
 		if(endPage > tempEndPage) {
 			endPage = tempEndPage;
 		}
 		
-		// <, > ½ºÅ¸Æ®, ¿£µå ÆäÀÌÁö ¾ÆÀÌÄÜ
+		// <, > ìŠ¤íƒ€íŠ¸, ì—”ë“œ í˜ì´ì§€ ì•„ì´ì½˜
 		prev = startPage > 1 ? true:false;
 		next = endPage*recordPage < totalCount ? true:false;
 	}
@@ -60,11 +60,11 @@ public class Pagination {
 	
 	// ======================================================= //
 	
-	public int getStartRecord() { // ÆäÀÌÁö ¹øÈ£¿¡ µû¶ó °è»êÇØ¼­ ³Ñ±ä´Ù. 
-		/* page°¡ 1ÀÌ¸é 0*10 ¸®ÅÏ
-		 * page°¡ 2ÀÌ¸é 1*10 ¸®ÅÏ
-		 * page°¡ 3ÀÌ¸é 2*10 ¸®ÅÏ
-		 * page°¡ 4ÀÌ¸é 3*10 ¸®ÅÏ
+	public int getStartRecord() { // í˜ì´ì§€ ë²ˆí˜¸ì— ë”°ë¼ ê³„ì‚°í•´ì„œ ë„˜ê¸´ë‹¤. 
+		/* pageê°€ 1ì´ë©´ 0*10 ë¦¬í„´
+		 * pageê°€ 2ì´ë©´ 1*10 ë¦¬í„´
+		 * pageê°€ 3ì´ë©´ 2*10 ë¦¬í„´
+		 * pageê°€ 4ì´ë©´ 3*10 ë¦¬í„´
 		 * 
 		 */	
 		return (page-1)*recordPage;
