@@ -76,4 +76,10 @@ public class PlaceServiceImpl implements PlaceService {
 		dao.place_update(vo, no);
 	}
 
+	@Override
+	public List<PlaceVO> readLocal(String local) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.readLocal(local);
+	}
+
 }

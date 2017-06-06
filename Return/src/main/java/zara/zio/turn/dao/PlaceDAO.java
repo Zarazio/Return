@@ -16,4 +16,6 @@ public interface PlaceDAO {
 	public void placeAll_delete(int no) throws Exception;
 	public void pimg_delete(int no) throws Exception;
 	public void place_update(PlaceVO vo, int no) throws Exception;
+	
+	public List<PlaceVO> readLocal(String local) throws Exception;
 }

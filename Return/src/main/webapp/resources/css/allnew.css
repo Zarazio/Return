@@ -7,6 +7,8 @@ html { overflow-x:hidden; }
 .turn-margin-top-28 { margin-top:28px; }
 #mainMenu { height:853px; float:left;}
 #heightfull { height:853px !important; }
+.turn-heightful { height:100% !important; }
+.turn-bottom-zero { margin-bottom:0px !important; }
 
 .turn-border-bottom { border-bottom:1px solid rgba(255, 255, 255, 0.1); }
 .turn-font-set { font-family:-webkit-body; font-size:16px; font-weight: bold; margin-top:4px; }
@@ -19,6 +21,15 @@ html { overflow-x:hidden; }
 .turn-c { width:310px !important; }
 .turn-tb-16 { margin-top: 15px; margin-bottom: 15px;}
 .turn-border { border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important; }
+
+.turn-local { 
+	background-color: rgb(51, 51, 51);
+	padding: 4px 0px 3px 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    font-size: 18px;
+    font-weight: bold; 
+}
+
 
 .turn-modal { 
 	display: none;

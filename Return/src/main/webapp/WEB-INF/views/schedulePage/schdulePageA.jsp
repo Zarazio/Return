@@ -6,9 +6,6 @@
 	<header id="topNav">
 		<div class="full-container">
 
-
-
-
 			<!-- Logo -->
 			<a class="logo pull-left" href="main">
 				<img src="http://placehold.it/200x80" alt="" />
@@ -132,10 +129,12 @@
 
 	</div>	
 	
-	<div id="mainMenu" class="sidebar-vertical sidebar-dark turn-scroll-auto turn-c">
-		<div class="sidebar-nav">
-			<div class="navbar navbar-default" role="navigation">
-			
+	<div id="mainMenu" class="sidebar-vertical sidebar-dark turn-c">
+		<div class="sidebar-nav turn-heightful">
+			<div class="navbar navbar-default turn-heightful turn-bottom-zero" role="navigation">
+				
+				<div class="turn-local">${local}</div>
+				
 				<!--.nav-collapse -->
 				<div class="navbar-collapse sidebar-navbar-collapse collapse turn-border">
 
@@ -152,6 +151,11 @@
 					
 				</div>
 				<!--/.nav-collapse -->
+				<div>
+				장소 이미지 카데고리 
+				</div>
+				
+				<div class="placeList turn-scroll-auto" style="height:725px;"></div>
 
 			</div>
 		</div>

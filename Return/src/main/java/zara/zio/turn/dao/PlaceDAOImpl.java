@@ -89,5 +89,11 @@ public class PlaceDAOImpl implements PlaceDAO {
 		paramMap.put("no", no);
 		sqlSession.update(NAMESPACE + ".place_update", paramMap);
 	}
+
+	@Override
+	public List<PlaceVO> readLocal(String local) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(NAMESPACE + ".read_local", local);
+	}
 	
 }

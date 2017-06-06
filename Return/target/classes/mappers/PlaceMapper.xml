@@ -10,6 +10,7 @@
 	<insert id="img_insert"> <!-- 이미지 isnert -->
 		insert into pimg_tbl (place_code, img_code, place_img, file_name) values (#{place_code}, #{img_code}, #{place_img}, #{file_name})
 	</insert>
+	
 	<select id="place_max" resultType="int"> <!-- 인설트후 맥스값 구하기 -->
 		SELECT max(place_code)
 		FROM place_tbl 
@@ -34,11 +35,23 @@
 		from pimg_tbl
 		where place_code = #{no};
 	</select>
+	
+	<select id="read_local" resultType="PlaceVO">
+		SELECT a.place_code AS place_code, a.place_name AS place_name, a.place_content AS place_content, 
+		a.place_address AS place_address, a.place_lat AS place_lat, a.place_lng AS place_lng, 
+		a.place_type AS place_type, b.place_img AS place_img
+		from place_tbl a, pimg_tbl b
+		where a.place_code = b.place_code
+		and a.place_address like #{local}
+		and b.img_code = 0;
+	</select>
+	
 	<update id="place_update">
 		update place_tbl set place_name=#{v.place_name}, place_content=#{v.place_content}, place_address=#{v.place_address}, 
 		place_lat=#{v.place_lat}, place_lng=#{v.place_lng}, place_type=#{v.place_type}, place_on=#{v.place_on}
 		where place_code = #{no}
 	</update>
+	
 	<delete id="placeAll_delete">
 		delete from place_tbl where place_code = #{no}
 	</delete>
@@ -46,6 +59,4 @@
 		delete from pimg_tbl where place_code = #{no}
 	</delete>
 	
-	<select id="place_listAll">
-	</select>
 </mapper>
