@@ -2,7 +2,9 @@ $(document).ready(function(){
 	$("#header").remove();
 	$("#topBar").remove();
 	$("#myModal").remove();
-	$("#footer").hide();	
+	$("#footer").hide();
+	
+	
 	
 	var date = $(".dateName").html(); // 날짜 객체를 가져온다. 2017-05-30 - 2017-06-22
 	var left = date.substr(0,10).split('-'); // 2017 05 30
@@ -123,6 +125,7 @@ $(document).ready(function(){
 							$("<div data-code="+data[i].place_code+"></div>")
 								.addClass("planList")
 								.append("<img src='http://placehold.it/150x150'>")
+								.append("<div class='planPlaceDelete' data-code='"+data[i].place_code+"'><a href='#'>삭제</a></div>") 
 								.css("border-bottom","1px solid black")
 							.appendTo(selectThis) ;
 						}
@@ -132,7 +135,7 @@ $(document).ready(function(){
 			}
 
 		})
-		/// ------------------------------------------------------ /// 		
+		
 		
 	}
 	
@@ -208,15 +211,18 @@ $(document).ready(function(){
              placeCode = ui.item.attr("data-code") ;
               
              ui.item.removeClass() ;
-             ui.item.addClass("planList").css("border-bottom","1px solid black") ;
+             var place = ui.item.addClass("planList").css("border-bottom","1px solid black") ;
+             place.append("<div class='planPlaceDelete'><a href='#'>삭제</a></div>") ;
              
 
 	       },
 	       receive : function(){
+	    	   // selectPlace의 draggable를 했을 때, 이벤트 발생
 	          console.log("receive : ") ;
 	          planListStore()
 	       },
 	       update : function(){
+	    	   // 위치가 바꼈을 때, 이벤트 발생
 	          console.log("update : ") ;
 	          planPriority()
 	       }
@@ -228,13 +234,11 @@ $(document).ready(function(){
     
     });
     
-    
+    //여행 계획에 추가한 장소를 저장하는 함수
     function planListStore(){
-  	     
-    	alert(placeCode + "플랜함수");
-//    	alert(planDay  + "플랜함수");
-//    	alert(groupCode  + "플랜함수");
-       
+  	       
+    	alert("placeCode : " + placeCode) ;
+    	
     	$.ajax({
     		type : 'POST',
     		url : 'planList',
@@ -243,6 +247,7 @@ $(document).ready(function(){
     			plan : planDay,
     			group : groupCode
     		},
+    		asnyc : "true" ,
     		success : function(data){
     			alert(data + "안했구나나아아아아");
     		}, 
@@ -255,7 +260,7 @@ $(document).ready(function(){
     
     }
     
-    
+    // 여행계획에 장소 우선순위  함수
     function planPriority(){
         var count ;
         var place ;
@@ -285,6 +290,7 @@ $(document).ready(function(){
                  count : count 
               },
               dataType : 'json' ,
+              asnyc : "true" ,
               success: function(data){
                  console.log("priority : 확인")
               }
@@ -325,6 +331,7 @@ $(document).ready(function(){
 								.addClass("planList")
 								.addClass("priority")
 								.append("<img src='http://placehold.it/150x150'><span>"+i+"</span>")
+								.append("<div class='planPlaceDelete' data-code='"+data[i].place_code+"'><a href='#'>삭제</a></div>") 
 								.css("border-bottom","1px solid black").appendTo(selectThis) ;
 							}
 						}
@@ -335,7 +342,47 @@ $(document).ready(function(){
 			});
 					
 	}
+    
+    
+	$(".planPlaceDelete a").on("click", function(){
+		event.preventDefault(); // 이벤트를 막아준다. 404error 막아줌
+		
+	
+		var targetPage = $(this).attr("href");
+		pageForm.find("[name=page]").val(targetPage);
+		pageForm.attr("action", "planPlaceDelete");
+		pageForm.attr("method", "get");
+		pageForm.submit();
+	});
+    
+ // 지도 부분-------------------------------------------------------------------------------------------------
+    
+//	var map = null;
+//	var marker = null;
+//	var cityhall = null;
+//	
+//	function initMap() {
+//	   cityhall = new naver.maps.LatLng(37.338337, 127.110111);
+//	
+//	   map = new naver.maps.Map('mapArea', {
+//	      center : cityhall,
+//	      zoom : 10
+//	   });
+//	
+//	   marker = new naver.maps.Marker({
+//	      map : map,
+//	      position : cityhall
+//	   });
+//	
+//	};
+
+
+
  
 
 	
 });
+
+
+
+

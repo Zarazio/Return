@@ -78,3 +78,18 @@ html { overflow-x:hidden; }
 } 
 
 .tboder { border: 1px solid !important; }
+
+.plan {
+	width : 260px
+}
+
+.planList {
+	position : relative ;
+	
+}
+
+.planPlaceDelete {
+	position : absolute ;
+	right : 0 ;
+	bottom : 0 ;
+}

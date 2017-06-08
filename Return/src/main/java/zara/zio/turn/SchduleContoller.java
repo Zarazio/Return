@@ -86,6 +86,7 @@ public class SchduleContoller {
 		return list;
 	}
 	
+	// 아직 사용하지 않음..하지만 같은날 같은 그룹에서 같은 장소가 추가될때  만들기위해 햇음
 	@ResponseBody
 	@RequestMapping (value="planPlaceCodCheck", method=RequestMethod.POST)
 	public int planPlaceCodCheck(TravelListVO travel,String place, String plan, String group) throws Exception{
@@ -104,7 +105,7 @@ public class SchduleContoller {
 		return count ;
 	}
 	
-	
+	// 일정계획리스트에 장소 추가하기 
 	@ResponseBody
 	@RequestMapping (value="planList", method=RequestMethod.POST)
 	public void planList(String place, String plan, String group, TravelListVO travel) throws Exception{
@@ -122,7 +123,8 @@ public class SchduleContoller {
 	    service1.create(travel) ;
 	      
 	}
-	   
+	
+	// 일정계획리스트로 뽑아오기
 	@ResponseBody
 	@RequestMapping (value="planDayList" , method=RequestMethod.POST)
 	public List<TravelListVO> planList01(String plan, String group , TravelListVO travel) throws Exception{
@@ -141,6 +143,7 @@ public class SchduleContoller {
 		
     }
 	
+	// 한 여행 그룹에 하루 잡은 여행계획 리스트의 우선순위 결정
 	@ResponseBody
 	@RequestMapping (value="planPlacePriority", method=RequestMethod.POST)
 	public void planPlacePriority(String place, String plan, String group, TravelListVO travel , int count) throws Exception {
