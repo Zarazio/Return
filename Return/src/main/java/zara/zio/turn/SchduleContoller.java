@@ -139,19 +139,27 @@ public class SchduleContoller {
 		return place;
       
 		
-   }
+    }
 	
 	@ResponseBody
 	@RequestMapping (value="planPlacePriority", method=RequestMethod.POST)
-	public void planPlacePriority(TravelListVO travel , String[] place_code ) {
-		
-		for(int i=0 ; i<place_code.length ;i++){
-			System.out.println("place_code : " +place_code[i]);
-			travel.setPlace_code(place_code[i]);
-			
-		}
-		
-	}
+	public void planPlacePriority(String place, String plan, String group, TravelListVO travel , int count) throws Exception {
+      
+		System.out.println("place : " + place + ", plan : " + plan + ", group : " + group ) ;
+		System.out.println("-----------------count : " + count);
+      
+		String place_code = place;
+		int group_Code = Integer.parseInt(group);
+		Date travel_Date = Date.valueOf(plan);
+       
+		travel.setTravel_Priority(count);
+		travel.setPlace_code(place_code);
+		travel.setGroup_Code(group_Code);
+		travel.setTravel_Date(travel_Date);
+       
+		service1.planPriority(travel);
+
+    }
 
 	
 }

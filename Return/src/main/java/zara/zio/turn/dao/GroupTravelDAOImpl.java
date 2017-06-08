@@ -50,4 +50,10 @@ public class GroupTravelDAOImpl implements GroupTravelDAO {
 		return sqlSession.selectOne(NAMESPACE + ".travel_place", travel);
 	}
 
+	@Override
+	public void planPriority(TravelListVO travel) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.selectOne(NAMESPACE + ".planPriority", travel);
+	}
+
 }

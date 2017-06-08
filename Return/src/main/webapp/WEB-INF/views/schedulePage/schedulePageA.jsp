@@ -109,7 +109,7 @@
 	
 	<div id="mainMenu" class="sidebar-vertical sidebar-dark turn-b">
 		<div class="sidebar-nav">
-			<div class="navbar navbar-default turn-bottom-zero" role="navigation">
+			<div class="navbar navbar-default turn-bottom-zero liAdd" role="navigation">
 			
 				<!--.nav-collapse -->
 				<div class="navbar-collapse sidebar-navbar-collapse collapse turn-border-bottom">
@@ -119,9 +119,7 @@
 				</div>
 				<!--/.nav-collapse -->
 				
-				<!-- ul 태그 생성부분 -->
-				<div class="liAdd turn-scroll-go"></div>
-				<!-- /ul 태그 생성부분 -->
+				<!-- div 태그생성 -->
 
 			</div>
 			

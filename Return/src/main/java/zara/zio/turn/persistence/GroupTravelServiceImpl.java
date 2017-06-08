@@ -48,4 +48,10 @@ public class GroupTravelServiceImpl implements GroupTravelService {
 		return dao.travel_place(travel);
 	}
 
+	@Override
+	public void planPriority(TravelListVO travel) throws Exception {
+		// TODO Auto-generated method stub
+		dao.planPriority(travel);
+	}
+
 }
