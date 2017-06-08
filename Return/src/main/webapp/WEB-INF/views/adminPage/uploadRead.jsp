@@ -65,12 +65,25 @@
 	</tr>	
 	</table>
 	
-	<div class="imgOn">
+	<div class="imgOn row">
 		<c:forEach items="${list}" var="list">
-			<div class="box">
-				<img src="displayFile?fileName=${fn:replace(list.place_img,'/','/s_')}" />
-				<b>${list.file_name}</b>
+			<div class="box col-md-3 col-sm-3">
+				<div class='design-level'>
+				<img src="displayFile?fileName=${fn:replace(list.place_img,'/','/s_')}" style="width:100%; height:170px;"/>
+				<div>
+					<h5 class='tresize'>
+						<c:choose>
+	      					<c:when test="${fn:length(list.file_name) > 25}">
+				            	<c:out value="${fn:substring(list.file_name,0,20)}"/>...
+				           	</c:when>
+				           	<c:otherwise>
+				            	<c:out value="${list.file_name}"/>
+				           	</c:otherwise> 
+				        </c:choose>
+					</h5>
+				</div>
 				<input type="hidden" class="imgDel" name="imgDel" value="${fn:replace(list.place_img,'/','/s_')}">
+				</div>
 			 </div>
 		</c:forEach>
 	</div>

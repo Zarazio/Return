@@ -56,17 +56,30 @@
 			<li>
 				<h3>Drag and Drop File Upload</h3>
 				<div class="fileDrop" id="check"></div>
-			<li>	
-				<div class="uploadedList">
+			<li>
+				<div class="uploadedList row">
 					<c:forEach items="${list}" var="list">
-						<span class="classCheck">
-							<a href="displayFile?fileName=${list.place_img}"><img src="displayFile?fileName=${fn:replace(list.place_img,'/','/s_')}"></a>
-							${list.file_name}
-							<small class="smal" data-src="${fn:replace(list.place_img,'/','/s_')}">
-								<a href="javascript:void(0);">X</a>
-							</small>
-							<input type="hidden" name="files" value="${list.place_img}">
-						</span>
+						<div class="classCheck col-md-3 col-sm-3">
+							<div class='design-level'>
+								<a href="displayFile?fileName=${list.place_img}">
+									<img src="displayFile?fileName=${fn:replace(list.place_img,'/','/s_')}" style="width:100%; height:170px;">
+								</a>
+								<div>
+									<h5 class='tresize'>
+										<c:choose>
+           									<c:when test="${fn:length(list.file_name) > 25}">
+								            	<c:out value="${fn:substring(list.file_name,0,20)}"/>...
+								           	</c:when>
+								           	<c:otherwise>
+								            	<c:out value="${list.file_name}"/>
+								           	</c:otherwise> 
+								        </c:choose>
+										<a><i class="smal tboder fa fa-close fa-border pull-right" data-src="${fn:replace(list.place_img,'/','/s_')}"></i></a>
+									</h5>
+								</div>
+								<input type="hidden" name="files" value="${list.place_img}">
+							</div>
+						</div>
 					</c:forEach>
 				</div>
 			<li>

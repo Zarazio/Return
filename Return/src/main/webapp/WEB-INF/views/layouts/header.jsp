@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
-<!-- Modal menu Controll-->
+<!-- Modal menu Controll--> 
 <div id="myModal" class="modal fade" role="dialog">
   	<div class="modal-dialog">
 	   
@@ -99,11 +98,11 @@
 							</p>
 							<p>
 								<input type="text" class="form-control text-center" name="travel_Title"
-								placeholder="여행 제목을 작성해주세요" value="">
+								placeholder="여행 제목을 작성해주세요" value="" autocomplete="off">
 							</p>
 							<p>
 								<input type="text" class="form-control text-center rangepicker" name="scheduleDate"
-								data-format="yyyy-mm-dd" placeholder="시작일자 - 종료일자 " value="">
+								data-format="yyyy-mm-dd" placeholder="시작일자 - 종료일자 " value="" maxlength="0" autocomplete="off">
 							</p>
 							<p>
 								<a id="addGroup" class="btn btn-primary btn-lg btn-block">그룹추가 +</a>
@@ -128,7 +127,7 @@
 	    </div>
 
   	</div>
-</div>
+</div> 
 <!-- /Modal menu Controll-->
 
 <!-- TopBar menu -->
@@ -193,7 +192,7 @@
 						<c:if test="${info == null}">
 							<li><a href="#">Log</a> <!-- 페이지 이동 -->
 							<li><a href="login">일정만들기</a>
-							<li><a href="#">장소</a>
+							<li><a href="placeInfo">장소</a>
 							<li><a href="#">Book</a>
 							<li><a href="comuList">커뮤니티</a>
 						</c:if>
@@ -206,7 +205,7 @@
 						<c:if test="${info == 'user'}">
 							<li><a href="#">Log</a></li>
 							<li><a id="modals" data-toggle="modal" data-target="#myModal">일정만들기</a></li>
-							<li><a href="#">장소</a></li>
+							<li><a href="placeInfo">장소</a></li>
 							<li><a href="#">Book</a></li>
 							<li><a href="comuList">커뮤니티</a></li>
 						</c:if>

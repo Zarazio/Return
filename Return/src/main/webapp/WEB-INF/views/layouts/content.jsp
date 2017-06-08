@@ -890,40 +890,40 @@
 			<h3 class="text-center margin-top-50 margin-bottom-40">사진 갤러리 <span>TOP</span></h3>
 			<div class="masonry-gallery columns-4 clearfix lightbox margin-bottom-20" data-img-big="4" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
 
-				<a class="image-hover" href="http://placehold.it/1200x800">
-					<img src="http://placehold.it/600x400" alt="...">
+				<a class="image-hover" href="./resources/img/contentC/Aa.jpg">
+					<img src="./resources/img/contentC/Aa1.jpg" alt="...">
 				</a>
 
-				<a class="image-hover" href="http://placehold.it/1200x800">
-					<img src="http://placehold.it/600x400" alt="...">
+				<a class="image-hover" href="./resources/img/contentC/Ab.jpg">
+					<img src="./resources/img/contentC/Ab1.jpg" alt="...">
 				</a>
 
-				<a class="image-hover" href="http://placehold.it/1200x800">
-					<img src="http://placehold.it/600x400" alt="...">
+				<a class="image-hover" href="./resources/img/contentC/Ac.jpg">
+					<img src="./resources/img/contentC/Ac1.jpg" alt="...">
 				</a>
 
-				<a class="image-hover" href="http://placehold.it/1200x800">
-					<img src="http://placehold.it/600x400" alt="...">
+				<a class="image-hover" href="./resources/img/contentC/Ad.jpg">
+					<img src="./resources/img/contentC/Ad1.jpg" alt="...">
 				</a>
 
-				<a class="image-hover" href="http://placehold.it/1200x800">
-					<img src="http://placehold.it/600x400" alt="...">
+				<a class="image-hover" href="./resources/img/contentC/Ae.jpg">
+					<img src="./resources/img/contentC/Ae1.jpg" alt="...">
 				</a>
 
-				<a class="image-hover" href="http://placehold.it/1200x800">
-					<img src="http://placehold.it/600x400" alt="...">
+				<a class="image-hover" href="./resources/img/contentC/Af.jpg">
+					<img src="./resources/img/contentC/Af1.jpg" alt="...">
 				</a>
 
-				<a class="image-hover" href="http://placehold.it/1200x800">
-					<img src="http://placehold.it/600x400" alt="...">
+				<a class="image-hover" href="./resources/img/contentC/Ag.jpg">
+					<img src="./resources/img/contentC/Ag1.jpg" alt="...">
 				</a>
 
-				<a class="image-hover" href="http://placehold.it/1200x800">
-					<img src="http://placehold.it/600x400" alt="...">
+				<a class="image-hover" href="./resources/img/contentC/Ah.jpg">
+					<img src="./resources/img/contentC/Ah1.jpg" alt="...">
 				</a>
 
-				<a class="image-hover" href="http://placehold.it/1200x800">
-					<img src="http://placehold.it/600x400" alt="...">
+				<a class="image-hover" href="./resources/img/contentC/Ai.jpg">
+					<img src="./resources/img/contentC/Ai1.jpg" alt="...">
 				</a>
 
 			</div>

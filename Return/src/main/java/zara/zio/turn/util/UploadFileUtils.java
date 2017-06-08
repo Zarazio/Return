@@ -60,7 +60,7 @@ public class UploadFileUtils {
 				ImageIO.read(new File(uploadPath, fileName));
 		// 100 픽셀단위 썸네일 생성
 		BufferedImage destImg = 
-				Scalr.resize(sourceImg, 200, null, null);
+				Scalr.resize(sourceImg, 600, null, null);
 //				Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 100);
 		// 썸네일의 이름생성 "s_"를 붙임
 		String thumbnailName = 

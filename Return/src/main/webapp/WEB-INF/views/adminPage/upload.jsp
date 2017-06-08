@@ -79,7 +79,7 @@
 				<h3>Drag and Drop File Upload</h3>
 				<div class="fileDrop" id="check"></div>
 			<li>	
-				<div class="uploadedList"></div>
+				<div class="uploadedList row"></div>
 			<li>
 				<input type="submit" value="등록하기" id="btnsub">
 		</ul>

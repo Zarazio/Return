@@ -7,7 +7,7 @@ $(document).ready(function(){
 	// ******************************* upload.jsp & uploadSet.jsp ******************************* //
 	$('#btnsub').on('click', function() {
 		hasBeenClicked = true;
-		if($(".uploadedList > span").hasClass("classCheck")) { // 
+		if($(".uploadedList > div").hasClass("classCheck")) { // 
 			$('#textbr')[0].submit();
 			if($('#btnsub').val() == '등록하기')
 				alert("등록이 완료되었습니다.");
@@ -54,13 +54,14 @@ $(document).ready(function(){
 				success: function(data) {
 					var str ="";
 					// http://localhost:8082/turn/displayFile?fileName=/2017/04/13/23786db8-a717-4c08-8d77-c6668265e168_muming.png
-					str = "<span class='classCheck'>"
+					str = "<div class='classCheck col-md-3 col-sm-3'>"
+						+ "<div class='design-level'>"
 						+ "<a href='displayFile?fileName=" + getImageLink(data) + "'>"
-						+ "<img src='displayFile?fileName=" + data + "'/></a>"
-						+ getTextSlice(data)
-						+ "<small data-src=" + data + "><a href='javascript:void(0);'>X</a></small>"
+						+ "<img src='displayFile?fileName=" + data + "' style='width:100%; height:170px;'/></a>"
+						+ "<div><h5 class='tresize'>" + getTextSlice(data) + "<a><i class='tboder fa fa-close fa-border pull-right' data-src=" + data + "></i></a></h5></div>"
 						+ "<input type='hidden' name='files' value='" + getImageLink(data) + "' class='datacookie'>" 
-						+ "</span>";
+						+ "</div>"
+						+ "</div>";
 					$(".uploadedList").append(str);	
 				}
 				
@@ -112,14 +113,14 @@ $(document).ready(function(){
 				success: function(data) {
 					var str ="";
 					// http://localhost:8082/turn/displayFile?fileName=/2017/04/13/23786db8-a717-4c08-8d77-c6668265e168_muming.png
-						str = "<span class='classCheck'>"
-							+ "<a href='displayFile?fileName=" + getImageLink(data) + "'>"
-							+ "<img src='displayFile?fileName=" + data + "'/></a>"
-							+ getTextSlice(data)
-							+ "<small data-src=" + data + "><a href='javascript:void(0);'>X</a></small>"
-							+ "<input type='hidden' name='files' value='" + getImageLink(data) + "' class='datacookie'>" 
-							+ "</span>";
-	
+					str = "<div class='classCheck col-md-3 col-sm-3'>"
+						+ "<div class='design-level'>"
+						+ "<a href='displayFile?fileName=" + getImageLink(data) + "'>"
+						+ "<img src='displayFile?fileName=" + data + "' style='width:100%; height:170px;'/></a>"
+						+ "<div><h5 class='tresize'>" + getTextSlice(data) + "<a><i class='tboder fa fa-close fa-border pull-right' data-src=" + data + "></i></a></h5></div>"
+						+ "<input type='hidden' name='files' value='" + getImageLink(data) + "' class='datacookie'>" 
+						+ "</div>"
+						+ "</div>";
 					$(".uploadedList").append(str);
 					
 				}
@@ -132,7 +133,7 @@ $(document).ready(function(){
 	// ajax 삭제요청이 처리되고 나면 클릭한 small엘리먼트의 부모태그인 div를 삭제하게된다.
 	// $(this)를 사용하면 보다 간편하게 코드를 작성가능 $(this)를 알기 전까지는 목록의 레코드마다 id속성을 배열 만들어서로 처리했지만 
 	// $(this)를 사용하면 배열로 처리하지 않고 클릭 이벤트만으로 구분을 할 수가 있기 때문
-	$(".uploadedList").on("click", "small", function(event) {
+	$(".uploadedList").on("click", "i", function(event) {
 		var that = $(this); // this는 클릭한 small태그
 		$.ajax({
 			url: "./deleteFile",
@@ -143,7 +144,7 @@ $(document).ready(function(){
 			dataType: "text",
 			success: function(result){
 				if(result == 'deleted') {
-					that.parent("span").remove();
+					that.parent("a").parent("h5").parent("div").parent("div").parent("div").remove();
 				}
 			}
 		});
@@ -153,7 +154,7 @@ $(document).ready(function(){
 	$(".smal").on("click", function() {
 		var text = $(this).attr("data-src");
 		var that = $(this); // this는 클릭한 small태그
-		that.parent("span").remove();
+		that.parent("a").parent("h5").parent("div").parent("div").parent("div").remove();
 		var deleteCookie = "<input type='hidden' name='cookieFile' value='" + text + "'>";
 		$(".uploadedList").append(deleteCookie);
 			
@@ -184,7 +185,15 @@ $(document).ready(function(){
 		var idx = fileName.indexOf("_") + 1; // /2017/04/13/s_
 		var idxA = fileName.substr(idx); //8d67994e-4152-4ae1-adc5-5e808459314a_muming.png
 		idx = idxA.indexOf("_")+1 // 8d67994e-4152-4ae1-adc5-5e808459314a_
-		return idxA.substr(idx); // muming.png
+		var text = idxA.substr(idx); // muming.png
+		
+		if (text.length > 25) {	
+			var pattern = /.jpg|.gif|.png|.jpeg/i;
+			text = text.replace(pattern,"").substr(0,20) + "...";
+		}
+		
+		
+		return text;
 	}
 	
 	// 페이지를 벗어났을시 저장된 이미지, 썸네일 정보의 제거 

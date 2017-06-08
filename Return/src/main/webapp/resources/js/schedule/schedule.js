@@ -122,7 +122,7 @@ $(document).ready(function(){
 	// draggable
     $(".placeList").on("mouseover", ".place", function(){
        // placeCode에 현재 클릭하고 있는 애를 선택
-    	placeCode = $(this) ;
+    	placeCode = $(this);
     	
        $(".place").draggable({
           helper :  "clone"

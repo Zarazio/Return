@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import zara.zio.turn.domain.GroupVO;
 import zara.zio.turn.domain.PlaceVO;
@@ -29,13 +30,13 @@ public class SchduleContoller {
 	
 	
 	@RequestMapping (value="scheduleSet", method=RequestMethod.POST) // 스케쥴 페이지 이동 
-	public String schduleSet(GroupVO group, String scheduleDate, String local, Model model) throws Exception {
+	public String schduleSet(GroupVO group, String scheduleDate, String local, RedirectAttributes rttr) throws Exception {
 		
 		
 		String[] date = scheduleDate.split(" - ");
 		   
-	    String date01 = date[0] ;
-	    String date02 = date[1] ;
+	    String date01 = date[0];
+	    String date02 = date[1];
 	      
 	    Date start_Date = Date.valueOf(date01) ;
 	    Date end_Date = Date.valueOf(date02) ;
@@ -46,39 +47,26 @@ public class SchduleContoller {
 	    service1.create(group);
 	      
 	    // groupCode 뽑아내는 문
-	    int groupCode = service1.selectGroupCode(group) ;
-	    
-		System.out.println(scheduleDate);
+	    int groupCode = service1.selectGroupCode(group);
 		
-		if(scheduleDate.isEmpty())
-			scheduleDate = "nullTest";
+		rttr.addAttribute("scheduleDate", scheduleDate);
+		rttr.addAttribute("local", local);
+		rttr.addAttribute("groupCode", groupCode);
 		
-		if(local.isEmpty())
-			local = "알수없는 지역";
+		return "redirect:scheduleSet";
+	}
+	
+	@RequestMapping (value="scheduleSet", method=RequestMethod.GET) // 스케쥴 페이지 이동 
+	public String schduleSetG(String scheduleDate, String local, int groupCode, Model model) {
 		
 		model.addAttribute("scheduleDate", scheduleDate);
 		model.addAttribute("local", local);
 		model.addAttribute("groupCode", groupCode);
 		
-		return "schedulePage/schdulePageA";
+		return "schedulePage/schedulePageA";
+		
 	}
 	
-	@RequestMapping (value="scheduleSet", method=RequestMethod.GET) // 스케쥴 페이지 이동 
-	public String schduleSetG(String scheduleDate, String local, Model model) {
-		
-		System.out.println(scheduleDate);
-		
-		if(scheduleDate == null)
-			scheduleDate = "nullTest";
-		
-		if(local == null)
-			local = "알수없는 지역";
-		
-		model.addAttribute("scheduleDate", scheduleDate);
-		model.addAttribute("local", local);
-		
-		return "schedulePage/schdulePageA";
-	}
 	
 	@ResponseBody
 	@RequestMapping (value="placeList", method=RequestMethod.GET) // 장소정보 가져오기

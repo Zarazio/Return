@@ -58,7 +58,7 @@
 				<hr />
 
 				<!-- side navigation -->
-				<div class="side-nav margin-bottom-40 margin-top-40">
+				<div class="side-nav margin-top-40 margin-bottom-200">
 
 					<div class="side-nav-head">
 						<button class="fa fa-bars"></button>
@@ -72,11 +72,12 @@
 				
 				</div>
 
-
+				<!-- 
 				<hr />
-
+				 -->
 
 				<!-- SOCIAL ICONS -->
+				<!--
 				<div class="hidden-xs margin-top-40 margin-bottom-200 margin-left-6">
 					<a href="#" class="social-icon social-icon-border social-facebook pull-center" data-toggle="tooltip" data-placement="top" title="Facebook">
 						<i class="icon-facebook"></i>
@@ -103,6 +104,7 @@
 						<i class="icon-rss"></i>
 					</a>
 				</div>
+				 -->
 
 			</div>
 

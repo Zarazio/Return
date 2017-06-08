@@ -17,11 +17,11 @@
     <!-- Travel 단  -->
     
     <insert id="planList_insert">
-      insert into travel_List (travel_Date, place_code, group_Code)
+      insert into travel_list (travel_Date, place_code, group_Code)
       values(#{travel_Date}, #{place_code} , #{group_Code})
    </insert>
    
    <select id="planDayList" resultType="TravelListVO">
-      select       
+      select
    </select>
 </mapper>

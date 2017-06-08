@@ -186,7 +186,7 @@
 
 				<!-- TAGS -->
 				<h3 class="hidden-xs size-16 margin-bottom-20">TAGS</h3>
-				<div class="hidden-xs margin-bottom-40 padding-8">
+				<div class="hidden-xs margin-bottom-60 padding-8">
 
 					<a class="tag" href="#">
 						<span class="txt">RESPONSIVE</span>
@@ -214,10 +214,11 @@
 					</a>
 				</div>
 
+				<!-- 
 				<hr />
-
-
+				-->
 				<!-- SOCIAL ICONS -->
+				<!-- 
 				<div class="hidden-xs margin-top-40 margin-bottom-60 margin-left-6">
 					<a href="#" class="social-icon social-icon-border social-facebook pull-center" data-toggle="tooltip" data-placement="top" title="Facebook">
 						<i class="icon-facebook"></i>
@@ -244,6 +245,7 @@
 						<i class="icon-rss"></i>
 					</a>
 				</div>
+				-->
 
 			</div>
 
