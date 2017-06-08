@@ -107,30 +107,26 @@
 	</div>	
 	
 	
-	<div id="mainMenu" class="sidebar-vertical sidebar-dark turn-scroll-auto turn-b">
+	<div id="mainMenu" class="sidebar-vertical sidebar-dark turn-b">
 		<div class="sidebar-nav">
 			<div class="navbar navbar-default turn-bottom-zero" role="navigation">
 			
 				<!--.nav-collapse -->
-				<div class="navbar-collapse sidebar-navbar-collapse collapse">
-
-					<!-- MENU -->
-					<ul class="nav navbar-nav turn-nav selectPlace" style="height:853px;">
-						<li class="turn-border-bottom">
-							<div>
-								<label class="text-center turn-font-set dayChoose"></label>
-							</div>
-						</li>
-					</ul>
-					<!-- /MENU -->
-					
+				<div class="navbar-collapse sidebar-navbar-collapse collapse turn-border-bottom">
+					<div>
+						<label class="text-center turn-font-set dayChoose"></label>
+					</div>
 				</div>
 				<!--/.nav-collapse -->
+				
+				<!-- ul 태그 생성부분 -->
+				<div class="liAdd turn-scroll-go"></div>
+				<!-- /ul 태그 생성부분 -->
 
 			</div>
 			
 		</div>
-
+		
 	</div>	
 	
 	<div id="mainMenu" class="sidebar-vertical sidebar-dark turn-c">
@@ -159,7 +155,7 @@
 				장소 이미지 카데고리 
 				</div>
 				
-				<div class="placeList turn-scroll-auto" style="height:725px;"></div>
+				<div class="placeList turn-scroll-auto" style="height:727px;"></div>
 
 			</div>
 		</div>
@@ -172,7 +168,7 @@
 		<div id="mapArea" style="width:100%; height:853px;"></div>
 	</section>
 	
-	 <script>
+	<script>
 		 var map = null;
 		 var marker = null;
 		 var cityhall = null;

@@ -31,8 +31,7 @@ public class SchduleContoller {
 	
 	@RequestMapping (value="scheduleSet", method=RequestMethod.POST) // 스케쥴 페이지 이동 
 	public String schduleSet(GroupVO group, String scheduleDate, String local, RedirectAttributes rttr) throws Exception {
-		
-		
+
 		String[] date = scheduleDate.split(" - ");
 		   
 	    String date01 = date[0];
@@ -56,8 +55,11 @@ public class SchduleContoller {
 		return "redirect:scheduleSet";
 	}
 	
+	
+	
 	@RequestMapping (value="scheduleSet", method=RequestMethod.GET) // 스케쥴 페이지 이동 
 	public String schduleSetG(String scheduleDate, String local, int groupCode, Model model) {
+
 		
 		model.addAttribute("scheduleDate", scheduleDate);
 		model.addAttribute("local", local);
@@ -85,19 +87,37 @@ public class SchduleContoller {
 	}
 	
 	@ResponseBody
+	@RequestMapping (value="planPlaceCodCheck", method=RequestMethod.POST)
+	public int planPlaceCodCheck(TravelListVO travel,String place, String plan, String group) throws Exception{
+		
+		String place_code = place;
+	    int group_Code = Integer.parseInt(group);
+	    Date travel_Date = Date.valueOf(plan);
+	      
+	    travel.setPlace_code("%" + place_code);
+	    travel.setGroup_Code(group_Code);
+	    travel.setTravel_Date(travel_Date);
+		
+		int count = service1.travel_place(travel) ;
+		System.out.println("placecheck : " + place);
+		//System.out.println("countDB  : " + count);
+		return count ;
+	}
+	
+	
+	@ResponseBody
 	@RequestMapping (value="planList", method=RequestMethod.POST)
 	public void planList(String place, String plan, String group, TravelListVO travel) throws Exception{
-	    int place_code = Integer.parseInt(place);
+	    String place_code = place;
 	    int group_Code = Integer.parseInt(group);
 	    Date travel_Date = Date.valueOf(plan);
 	      
 	    travel.setPlace_code(place_code);
 	    travel.setGroup_Code(group_Code);
 	    travel.setTravel_Date(travel_Date);
-	      
-	    System.out.println("DdD"+travel.getGroup_Code()) ;
-	   
-	    System.out.println(travel.getPlace_code()) ;
+	    
+	    
+	
 	      
 	    service1.create(travel) ;
 	      
@@ -105,19 +125,33 @@ public class SchduleContoller {
 	   
 	@ResponseBody
 	@RequestMapping (value="planDayList" , method=RequestMethod.POST)
-	public void planList(String plan, String group , TravelListVO travel) throws Exception{
+	public List<TravelListVO> planList01(String plan, String group , TravelListVO travel) throws Exception{
       
 		int group_Code = Integer.parseInt(group) ;
 		Date travel_Date = Date.valueOf(plan) ;
       
 		travel.setGroup_Code(group_Code);
 		travel.setTravel_Date(travel_Date);
+		
+		List<TravelListVO> place = service1.planDayList(travel);
+	
+		
+		return place;
       
-		System.out.println("DdD"+travel.getGroup_Code()) ;
-   
-		System.out.println(travel.getPlace_code()) ;
-      
+		
    }
+	
+	@ResponseBody
+	@RequestMapping (value="planPlacePriority", method=RequestMethod.POST)
+	public void planPlacePriority(TravelListVO travel , String[] place_code ) {
+		
+		for(int i=0 ; i<place_code.length ;i++){
+			System.out.println("place_code : " +place_code[i]);
+			travel.setPlace_code(place_code[i]);
+			
+		}
+		
+	}
 
 	
 }

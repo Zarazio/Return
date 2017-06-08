@@ -7,7 +7,7 @@ import java.util.UUID;
 import javax.imageio.ImageIO;
 
 import org.imgscalr.Scalr;
-import org.imgscalr.Scalr.Method;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.FileCopyUtils;
@@ -15,7 +15,6 @@ import org.springframework.util.FileCopyUtils;
 public class UploadFileUtils {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UploadFileUtils.class);
-	private static Method resizeMode;
 	
 	// 업로드 기능의 설계 
 	public static String uploadFile(String uploadPath, 
