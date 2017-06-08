@@ -1,11 +1,14 @@
 package zara.zio.turn.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import zara.zio.turn.domain.GroupVO;
+import zara.zio.turn.domain.PlaceVO;
 import zara.zio.turn.domain.TravelListVO;
 
 @Repository
@@ -34,6 +37,18 @@ public class GroupTravelDAOImpl implements GroupTravelDAO {
 	public void create(TravelListVO travel) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.insert(NAMESPACE + ".planList_insert", travel) ; 
+	}
+
+	@Override
+	public List<TravelListVO> planDayList(TravelListVO travel) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(NAMESPACE + ".planDayList" , travel) ;
+	}
+
+	@Override
+	public int travel_place(TravelListVO travel) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAMESPACE + ".travel_place", travel);
 	}
 
 }

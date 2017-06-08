@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 html { overflow-x:hidden; }
-
+li, ul {margin : 0 ;  padding : 0 ;  list-style-type : none}
 .turn-bgblue { color:#ccc; background-color: #179BD7; border-bottom-color: rgba(255,255,255,0.1);}
 .turn-hei-center { margin: 8px 0px 8px 0px !important;}
 .turn-margin-top-28 { margin-top:28px; }
@@ -30,7 +30,7 @@ html { overflow-x:hidden; }
     font-weight: bold; 
 }
 
-
+.selectPlace { height : 700px ;}
 .turn-modal { 
 	display: none;
 	float: left;

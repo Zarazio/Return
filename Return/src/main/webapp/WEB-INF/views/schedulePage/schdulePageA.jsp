@@ -113,15 +113,11 @@
 			
 				<!--.nav-collapse -->
 				<div class="navbar-collapse sidebar-navbar-collapse collapse">
-
+					<div class="turn-border-bottom">
+						<label class="text-center turn-font-set dayChoose"></label>
+					</div>
 					<!-- MENU -->
-					<ul class="nav navbar-nav turn-nav selectPlace" style="height:853px;">
-						<li class="turn-border-bottom">
-							<div>
-								<label class="text-center turn-font-set dayChoose"></label>
-							</div>
-						</li>
-					</ul>
+					
 					<!-- /MENU -->
 					
 				</div>
@@ -129,6 +125,9 @@
 
 			</div>
 			
+		</div>
+		
+	
 		</div>
 
 	</div>	

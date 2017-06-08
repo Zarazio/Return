@@ -1,11 +1,14 @@
 package zara.zio.turn.persistence;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import zara.zio.turn.dao.GroupTravelDAO;
 import zara.zio.turn.domain.GroupVO;
+import zara.zio.turn.domain.PlaceVO;
 import zara.zio.turn.domain.TravelListVO;
 
 @Service
@@ -32,6 +35,18 @@ public class GroupTravelServiceImpl implements GroupTravelService {
 	public void create(TravelListVO travel) throws Exception {
 		// TODO Auto-generated method stub
 		dao.create(travel);
+	}
+
+	@Override
+	public List<TravelListVO> planDayList(TravelListVO travel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.planDayList(travel);
+	}
+
+	@Override
+	public int travel_place(TravelListVO travel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.travel_place(travel);
 	}
 
 }
