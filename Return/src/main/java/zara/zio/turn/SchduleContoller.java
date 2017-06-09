@@ -161,7 +161,8 @@ public class SchduleContoller {
 	@ResponseBody
 	@RequestMapping (value="planPlaceDelete", method=RequestMethod.POST)
     public void planPlaceDelete(String place, String plan, String group, TravelListVO travel) throws Exception{
-	    String place_code = place;
+	    
+		String place_code = place;
 	    int group_Code = Integer.parseInt(group);
 	    Date travel_Date = Date.valueOf(plan);
 	       

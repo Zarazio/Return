@@ -28,7 +28,6 @@ html { overflow-x:hidden; }
 .mxpnone { list-style-type:none; margin:0; padding:0; }
 
 .planList { position: relative; }
-
 .planPlaceDelete { position: absolute; right: 0; bottom: 0; }
 
 
@@ -83,3 +82,18 @@ html { overflow-x:hidden; }
 } 
 
 .tboder { border: 1px solid !important; }
+
+.plan {
+	width : 260px
+}
+
+.planList {
+	position : relative ;
+	
+}
+
+.planPlaceDelete {
+	position : absolute ;
+	right : 0 ;
+	bottom : 0 ;
+}

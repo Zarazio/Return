@@ -16,5 +16,5 @@ public interface GroupTravelDAO {
 	public List<TravelListVO> planDayList(TravelListVO travel) throws Exception;
 	public int travel_place(TravelListVO travel) throws Exception; // travel_list에 같은 placeCode가 있는지
 	public void planPriority(TravelListVO travel) throws Exception;
-	public void planDelete(TravelListVO travel) throws Exception ;
+	public void planDelete(TravelListVO travel) throws Exception;
 }

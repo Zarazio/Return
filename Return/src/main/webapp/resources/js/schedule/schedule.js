@@ -105,7 +105,7 @@ $(document).ready(function(){
 		$(".selectPlace").each(function(){
 	         
 	         var selectThis = $(this) ;
-	         var select = $(this).attr("data-nal") ;
+	         var select = $(this).attr("data-nal");
 	         
 	         if(select == planDay){
 	            $(this).css("display", "block") ;
