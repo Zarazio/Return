@@ -115,9 +115,6 @@ public class SchduleContoller {
 	    travel.setPlace_code(place_code);
 	    travel.setGroup_Code(group_Code);
 	    travel.setTravel_Date(travel_Date);
-	    
-	    
-	
 	      
 	    service1.create(travel) ;
 	      
@@ -160,6 +157,20 @@ public class SchduleContoller {
 		service1.planPriority(travel);
 
     }
+	
+	@ResponseBody
+	@RequestMapping (value="planPlaceDelete", method=RequestMethod.POST)
+    public void planPlaceDelete(String place, String plan, String group, TravelListVO travel) throws Exception{
+	    String place_code = place;
+	    int group_Code = Integer.parseInt(group);
+	    Date travel_Date = Date.valueOf(plan);
+	       
+	    travel.setPlace_code(place_code);
+	    travel.setGroup_Code(group_Code);
+	    travel.setTravel_Date(travel_Date);
+	      
+	    service1.planDelete(travel);
+	}
 
 	
 }

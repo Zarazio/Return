@@ -33,10 +33,16 @@
    </select>
    
    <update id="planPriority">
-        update travel_list set travel_Priority=#{travel_Priority} 
-        where travel_Date = #{travel_Date} 
-        and group_Code = #{group_Code} 
-        and place_code = #{place_code}
+     update travel_list set travel_Priority=#{travel_Priority} 
+     where travel_Date = #{travel_Date} 
+     and group_Code = #{group_Code} 
+     and place_code = #{place_code}
    </update>
+   
+   <delete id="planDelete">
+     delete from travel_list where travel_Date = #{travel_Date} 
+     and group_Code = #{group_Code} 
+     and place_code = #{place_code}
+   </delete>
    
 </mapper>

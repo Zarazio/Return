@@ -27,6 +27,11 @@ html { overflow-x:hidden; }
 .selectPlace { height: 819px; list-style-type:none; margin:0; padding:0;}
 .mxpnone { list-style-type:none; margin:0; padding:0; }
 
+.planList { position: relative; }
+
+.planPlaceDelete { position: absolute; right: 0; bottom: 0; }
+
+
 .turn-local { 
 	background-color: rgb(51, 51, 51);
 	padding: 4px 0px 3px 15px;

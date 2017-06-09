@@ -56,4 +56,10 @@ public class GroupTravelDAOImpl implements GroupTravelDAO {
 		sqlSession.selectOne(NAMESPACE + ".planPriority", travel);
 	}
 
+	@Override
+	public void planDelete(TravelListVO travel) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(NAMESPACE + ".planDelete", travel);
+	}
+
 }
