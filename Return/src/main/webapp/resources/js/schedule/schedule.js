@@ -18,6 +18,9 @@ $(document).ready(function(){
 	var groupCode = $("#groupCode").text(); //schdulePageA groupCode
 	var placeCode; //place_code 받는 변수
 	var priority = 0; // priority 변수 
+	var priority01 = 0;
+	
+	
 	
 	elements = $(".addMenu"); // ul 엘리먼트값불러온다.
 	
@@ -185,8 +188,9 @@ $(document).ready(function(){
 	}
 	
 	
+	// 장소 리스트 선택할때, draggable 선택
     $(".placeList").on("mouseover", ".place", function(){
-        var aa ;
+        
         placeCode = $(this).attr("data-code") ;
         
         $(".place").draggable({
@@ -197,62 +201,60 @@ $(document).ready(function(){
             
         });
         
-       
-        $(".selectPlace").sortable({
-        	
-        	
-             
-        	 start : function(){
-        		
-        		 
-        		
-        	 },
-             over : function(event, ui){
-              	 
-              
-
-              placeCode = ui.item.attr("data-code") ;
-              if(ui.item.hasClass("place")){
-            	  //priority++ ;
-
-            	  planPlaceCheck() ;
-            	  planRealTimePriority() ;
-            	  
-            	  aa = ui.item.attr("data-pri");
-            	  console.log("aa check : " + aa) ;
-            	  console.log("priority : ddd " + ui.item.attr("data-pri")) ;
-            	  console.log("ddddd : " + priority );
-                  ui.item.attr("data-pri", priority);
-            	  ui.item.append("<div class='planPlaceDelete'><a href='#'>삭제</a></div>");
-            	  ui.item.removeClass() ;
-            	  ui.item.addClass("planList").css("border-bottom","1px solid black");
-              }
-
-           },
-           receive : function(event ,ui){
-              // selectPlace의 draggable를 했을 때, 이벤트 발생
-              console.log("receive : ") ;
-              console.log("ui  : " + aa);
-              planRealTimePriority() ;
-              planListStore($(this));
-              
-              
-              
-           },
-           update : function(){
-              // 위치가 바꼈을 때, 이벤트 발생
-              console.log("update : ") ;
-              planRealTimePriority() ;
-              planPriority()
-           },
-           cursor: "crosshair"
-          
-        });
-
-     
      });
     
+    $(".selectPlace").sortable({
     
+        over : function(event, ui){
+  
+         placeCode = ui.item.attr("data-code") ;
+         
+         if(ui.item.hasClass("place")){
+  
+       	  planPlaceCheck() ;
+       	  
+
+       	  priority01 = ui.item;
+       	  
+          ui.item.attr("data-pri", priority);
+       	  ui.item.append("<div class='planPlaceDelete'><a href='#'>삭제</a></div>");
+       	  ui.item.removeClass() ;
+       	  ui.item.addClass("planList").css("border-bottom","1px solid black");
+         }
+
+      },
+      receive : function(event ,ui){
+         // selectPlace의 draggable를 했을 때, 이벤트 발생
+         console.log("receive : ") ;
+         
+         
+         planPriority() ;
+         planRealTimePriority() ;
+         priority01 = priority01.attr("data-pri");
+         console.log("priority : " + priority  + " priority01 : " + priority01);
+         if(priority != priority01)
+         {
+       	  priority = priority01 ;
+         }
+         planListStore($(this));
+        
+         
+         
+         
+      },
+      update : function(){
+         // 위치가 바꼈을 때, 이벤트 발생
+         console.log("update : ") ;
+         
+         planPriority();
+         planRealTimePriority() ;
+      },
+      cursor: "crosshair"
+     
+   });
+    
+    
+    // 변화된  data-pri 값을 나타내줌
     function planRealTimePriority(){
     	
     	var count = $(".selectPlace > div").parent().children().index($(this)) + 1 ;
@@ -262,9 +264,6 @@ $(document).ready(function(){
 
             $(this).attr("data-pri",countCheck) ;
             
-            //var item = {travel_place : Number(place), travel_Priority : Number(updatePriority)};
-            console.log("Tdata-code : " + $(this).attr("data-code")) ;
-            console.log("Tdata-pri : " + $(this).attr("data-pri")) ;
             countCheck++;
             
            
@@ -273,7 +272,7 @@ $(document).ready(function(){
     	
     }
     
-    
+    //day1~.. 에 계획된 장소가 몇개인지
     function planPlaceCheck(){
     	
     	
@@ -287,10 +286,8 @@ $(document).ready(function(){
     		},
     		async : false,
     		success : function(data){
-    			//console.log("plan : " + data)
     			
     			priority = data+1 ;
-    			//console.log("plan01 : " + priority)
     			
     		}, 
     		error : function() {
@@ -301,16 +298,9 @@ $(document).ready(function(){
     }
     
     // draggable 한거 db에 저장
-    function planListStore(dd){
+    function planListStore(){
   	     
-    	console.log(dd);
-//    	alert(placeCode + "플랜함수");
-//    	alert(planDay  + "플랜함수");
-//    	alert(groupCode  + "플랜함수");
-    	
     	alert("typeof : " + typeof(priority));
-//    	console.log("data-code : " + placeCode) ;
-//        console.log("data-pri : " + priority) ;
         
     	$.ajax({
     		type : 'POST',
@@ -333,7 +323,7 @@ $(document).ready(function(){
     
     }
     
-    
+    // 변경된 data-pri 를 데이터베이스에 넣어줌
     function planPriority(){
         var count=0;
         var place;
@@ -343,41 +333,37 @@ $(document).ready(function(){
         $(".selectPlace > div").each(function(){
  
            count = $(this).parent().children().index($(this)) + 1 ;
-           
-
+      
            place = $(this).attr("data-code") ;
            updatePriority = $(this).attr("data-pri") ;
            
-           //var item = {travel_place : Number(place), travel_Priority : Number(updatePriority)};
            var item = place;
            var items = updatePriority;
            
            array.push(item);
            array01.push(items) ;
-           
-          
+     
        })
-       console.log("count : " + count) ;
+      
         
        $.ajax({
-              url : "planPlacePriority",
-              type : "POST",
-              traditional: true,
-              data : {
-                 
-                 array :  array ,
-                 array01 : array01 ,
-                 group : groupCode ,
-                 plan : planDay ,
-                 count : count
-                 
-               
-              },
-              success: function(data){
-            	  console.log(data);
-                  console.log("priority : 확인")
-                
-              }
+	              url : "planPlacePriority",
+	              type : "POST",
+	              traditional: true,
+	              data : {
+	                 
+	                 array :  array ,
+	                 array01 : array01 ,
+	                 group : groupCode ,
+	                 plan : planDay ,
+	                 count : count
+	                  
+	              },
+	              success: function(data){
+	            	  console.log(data);
+	                  console.log("priority : 확인")
+	                
+	              }
             })
     }
     
@@ -441,8 +427,11 @@ $(document).ready(function(){
              plan : planDay
           },
           success : function(){
-             planList.parent().css("display","none");
-             //planPriority();
+             planList.parent().remove();
+             planPriority();
+             planRealTimePriority();
+             
+             
           },
           error : function(){
              alert("planPlaceDelete : error") ;
