@@ -17,7 +17,7 @@ $(document).ready(function(){
 	var planDayCheck ; // 첫째날인지 확인하는 용도
 	var groupCode = $("#groupCode").text(); //schdulePageA groupCode
 	var placeCode; //place_code 받는 변수
-	var placeCodeDB;
+	var priority = 0; // priority 변수 
 	
 	elements = $(".addMenu"); // ul 엘리먼트값불러온다.
 	
@@ -41,7 +41,7 @@ $(document).ready(function(){
 	//day 클릭 할때, 
 	$(".addMenu").on("click",".dayon", function(){
 		// var old = $(this).attr("data-day");
-	
+		priority = 0 ;
 		// day 클릭 할때마다, planDay에 현재 여행일정짜는 날짜 넣어줌
 		planDay = $(this).attr("data-nal");
 		
@@ -120,7 +120,7 @@ $(document).ready(function(){
 	               dataType : "json",
 	               success : function(data){
 	                  for(var i=0 ; i<data.length ; i++){
-	                     $("<div data-code="+data[i].place_code+"></div>")
+	                	  $("<div data-code="+data[i].place_code+" data-pri="+ data[i].travel_Priority +"></div>")
 	                        .addClass("planList")
 	                        .append("<img src='http://placehold.it/150x150'>")
 	                        .append("<div class='planPlaceDelete' data-code='"+data[i].place_code+"'><a href='#'>삭제</a></div>") 
@@ -186,7 +186,7 @@ $(document).ready(function(){
 	
 	
     $(".placeList").on("mouseover", ".place", function(){
-        
+        var aa ;
         placeCode = $(this).attr("data-code") ;
         
         $(".place").draggable({
@@ -197,14 +197,32 @@ $(document).ready(function(){
             
         });
         
-    
-        $(".selectPlace").sortable({ 
-
+       
+        $(".selectPlace").sortable({
+        	
+        	
+             
+        	 start : function(){
+        		
+        		 
+        		
+        	 },
              over : function(event, ui){
+              	 
+              
 
               placeCode = ui.item.attr("data-code") ;
               if(ui.item.hasClass("place")){
-                 
+            	  //priority++ ;
+
+            	  planPlaceCheck() ;
+            	  planRealTimePriority() ;
+            	  
+            	  aa = ui.item.attr("data-pri");
+            	  console.log("aa check : " + aa) ;
+            	  console.log("priority : ddd " + ui.item.attr("data-pri")) ;
+            	  console.log("ddddd : " + priority );
+                  ui.item.attr("data-pri", priority);
             	  ui.item.append("<div class='planPlaceDelete'><a href='#'>삭제</a></div>");
             	  ui.item.removeClass() ;
             	  ui.item.addClass("planList").css("border-bottom","1px solid black");
@@ -214,34 +232,94 @@ $(document).ready(function(){
            receive : function(event ,ui){
               // selectPlace의 draggable를 했을 때, 이벤트 발생
               console.log("receive : ") ;
-              planListStore()
+              console.log("ui  : " + aa);
+              planRealTimePriority() ;
+              planListStore($(this));
+              
+              
+              
            },
            update : function(){
               // 위치가 바꼈을 때, 이벤트 발생
               console.log("update : ") ;
+              planRealTimePriority() ;
               planPriority()
            },
            cursor: "crosshair"
-            
+          
         });
 
      
      });
     
     
-    function planListStore(){
+    function planRealTimePriority(){
+    	
+    	var count = $(".selectPlace > div").parent().children().index($(this)) + 1 ;
+    	var countCheck = 1 ;
+    	
+    	$(".selectPlace > div").each(function(){
+
+            $(this).attr("data-pri",countCheck) ;
+            
+            //var item = {travel_place : Number(place), travel_Priority : Number(updatePriority)};
+            console.log("Tdata-code : " + $(this).attr("data-code")) ;
+            console.log("Tdata-pri : " + $(this).attr("data-pri")) ;
+            countCheck++;
+            
+           
+        })
+    	
+    	
+    }
+    
+    
+    function planPlaceCheck(){
+    	
+    	
+    	$.ajax({
+    		type : 'POST',
+    		url : 'planPlaceCodCheck',
+    		data : {
+    			
+    			plan : planDay,
+    			group : groupCode 
+    		},
+    		async : false,
+    		success : function(data){
+    			//console.log("plan : " + data)
+    			
+    			priority = data+1 ;
+    			//console.log("plan01 : " + priority)
+    			
+    		}, 
+    		error : function() {
+    			alert("에러입니다.11111");
+    		}
+	   })
+    	
+    }
+    
+    // draggable 한거 db에 저장
+    function planListStore(dd){
   	     
+    	console.log(dd);
 //    	alert(placeCode + "플랜함수");
 //    	alert(planDay  + "플랜함수");
 //    	alert(groupCode  + "플랜함수");
-       
+    	
+    	alert("typeof : " + typeof(priority));
+//    	console.log("data-code : " + placeCode) ;
+//        console.log("data-pri : " + priority) ;
+        
     	$.ajax({
     		type : 'POST',
     		url : 'planList',
     		data : {
     			place : placeCode,
     			plan : planDay,
-    			group : groupCode
+    			group : groupCode,
+    			priority : priority 
     		},
     		success : function(data){
     			alert(data + "안했구나나아아아아");
@@ -257,37 +335,53 @@ $(document).ready(function(){
     
     
     function planPriority(){
-        var count;
+        var count=0;
         var place;
-        
+        var updatePriority ;
+        var array = new Array();
+        var array01 = new Array();
         $(".selectPlace > div").each(function(){
-           
+ 
            count = $(this).parent().children().index($(this)) + 1 ;
+           
 
            place = $(this).attr("data-code") ;
+           updatePriority = $(this).attr("data-pri") ;
            
-           console.log("count : " + count + ","  + place ) ;
-
-           $.ajax({
+           //var item = {travel_place : Number(place), travel_Priority : Number(updatePriority)};
+           var item = place;
+           var items = updatePriority;
+           
+           array.push(item);
+           array01.push(items) ;
+           
+          
+       })
+       console.log("count : " + count) ;
+        
+       $.ajax({
               url : "planPlacePriority",
               type : "POST",
+              traditional: true,
               data : {
+                 
+                 array :  array ,
+                 array01 : array01 ,
                  group : groupCode ,
                  plan : planDay ,
-                 place : place ,
-                 count : count 
+                 count : count
+                 
+               
               },
-              dataType : 'json' ,
               success: function(data){
-                 console.log("priority : 확인")
+            	  console.log(data);
+                  console.log("priority : 확인")
+                
               }
-           })
-
-        })
-
+            })
     }
     
-    // draggable 한거 db에 저장
+   
    
     //plan Day에 List 출력~
     function planDayPrint(){
@@ -311,7 +405,7 @@ $(document).ready(function(){
                  success : function(data){    
                 	 
                     for(var i=0 ; i<data.length; i++){
-                       $("<div data-code="+data[i].place_code+"></div>")
+                       $("<div data-code="+data[i].place_code+" data-pri="+ data[i].travel_Priority +"></div>")
                        .addClass("planList")
                        .addClass("priority")
                        .append("<img src='http://placehold.it/150x150'><span>"+i+"</span>")
@@ -347,7 +441,8 @@ $(document).ready(function(){
              plan : planDay
           },
           success : function(){
-             planList.parent().css("display","none")
+             planList.parent().css("display","none");
+             //planPriority();
           },
           error : function(){
              alert("planPlaceDelete : error") ;

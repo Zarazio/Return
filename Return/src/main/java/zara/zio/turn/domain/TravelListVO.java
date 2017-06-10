@@ -8,8 +8,9 @@ public class TravelListVO {
 	   private int travel_Priority; // 여행리스트우선순위
 	   private String travel_Memo; // 장소마다 메모
 	   private Date travel_Date; // 여행리스트 : 장소가 추가된날짜
-	   private String place_code; // 장소코드
+	   private int place_code; // 장소코드
 	   private int group_Code; // 그룹코드
+	   private int count ;
 	   
 	   public int getTravel_Code() {
 	      return travel_Code;
@@ -35,10 +36,10 @@ public class TravelListVO {
 	   public void setTravel_Date(Date travel_Date) {
 	      this.travel_Date = travel_Date;
 	   }
-	   public String getPlace_code() {
+	   public int getPlace_code() {
 	      return place_code;
 	   }
-	   public void setPlace_code(String place_code) {
+	   public void setPlace_code(int place_code) {
 	      this.place_code = place_code;
 	   }
 	   public int getGroup_Code() {
@@ -47,5 +48,11 @@ public class TravelListVO {
 	   public void setGroup_Code(int group_Code) {
 	      this.group_Code = group_Code;
 	   }
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	   
 	}

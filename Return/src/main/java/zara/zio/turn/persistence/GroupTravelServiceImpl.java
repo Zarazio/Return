@@ -60,4 +60,10 @@ public class GroupTravelServiceImpl implements GroupTravelService {
 		dao.planDelete(travel);
 	}
 
+	@Override
+	public List<TravelListVO> planRealTimePriority(TravelListVO travel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.planRealTimePriority(travel);
+	}
+
 }

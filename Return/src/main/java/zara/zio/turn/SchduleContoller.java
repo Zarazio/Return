@@ -1,17 +1,30 @@
-package zara.zio.turn;
+ package zara.zio.turn;
 
 import java.sql.Date;
+
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import zara.zio.turn.domain.GroupVO;
 import zara.zio.turn.domain.PlaceVO;
@@ -88,30 +101,33 @@ public class SchduleContoller {
 	
 	@ResponseBody
 	@RequestMapping (value="planPlaceCodCheck", method=RequestMethod.POST)
-	public int planPlaceCodCheck(TravelListVO travel,String place, String plan, String group) throws Exception{
+	public int planPlaceCodCheck(TravelListVO travel, String plan, String group) throws Exception{
 		
-		String place_code = place;
+	
 	    int group_Code = Integer.parseInt(group);
 	    Date travel_Date = Date.valueOf(plan);
 	      
-	    travel.setPlace_code("%" + place_code);
+	 
 	    travel.setGroup_Code(group_Code);
 	    travel.setTravel_Date(travel_Date);
 		
 		int count = service1.travel_place(travel) ;
-		System.out.println("placecheck : " + place);
-		//System.out.println("countDB  : " + count);
+		//System.out.println("placecheck : " + place);
+		System.out.println("countDB  : " + count);
 		return count ;
 	}
 	
 	
 	@ResponseBody
 	@RequestMapping (value="planList", method=RequestMethod.POST)
-	public void planList(String place, String plan, String group, TravelListVO travel) throws Exception{
-	    String place_code = place;
+	public void planList(String place, String plan, String group, TravelListVO travel, int priority) throws Exception{
+		int place_code = Integer.parseInt(place);
 	    int group_Code = Integer.parseInt(group);
 	    Date travel_Date = Date.valueOf(plan);
-	      
+	    
+		System.out.println("priority : " + travel.getTravel_Priority());
+		
+		travel.setTravel_Priority(priority);
 	    travel.setPlace_code(place_code);
 	    travel.setGroup_Code(group_Code);
 	    travel.setTravel_Date(travel_Date);
@@ -127,6 +143,8 @@ public class SchduleContoller {
 		int group_Code = Integer.parseInt(group) ;
 		Date travel_Date = Date.valueOf(plan) ;
       
+		
+		
 		travel.setGroup_Code(group_Code);
 		travel.setTravel_Date(travel_Date);
 		
@@ -140,29 +158,69 @@ public class SchduleContoller {
 	
 	@ResponseBody
 	@RequestMapping (value="planPlacePriority", method=RequestMethod.POST)
-	public void planPlacePriority(String place, String plan, String group, TravelListVO travel , int count) throws Exception {
-      
-		System.out.println("place : " + place + ", plan : " + plan + ", group : " + group ) ;
-		System.out.println("-----------------count : " + count);
-      
-		String place_code = place;
+	//public String planPlacePriority(@RequestBody List<TravelListVO> array) throws Exception {
+	public String planPlacePriority(HttpServletRequest request, String plan, String group, TravelListVO travel, int count) throws Exception {
+
+		int count_check = 0 ;
+		String[] array = (String[])request.getParameterValues("array") ;
+		String[] array01 = (String[])request.getParameterValues("array01") ;
+	
+		
 		int group_Code = Integer.parseInt(group);
 		Date travel_Date = Date.valueOf(plan);
        
 		travel.setTravel_Priority(count);
-		travel.setPlace_code(place_code);
 		travel.setGroup_Code(group_Code);
 		travel.setTravel_Date(travel_Date);
-       
-		service1.planPriority(travel);
+		
+		
+		for(int i=0 ; i<array.length ; i++){
+			System.out.println();
+			System.out.print("array : " + array[i]);
+			System.out.println();
+			System.out.print("array01 : " + array01[i]);
+			System.out.println();
+			count_check++ ;
+			if(count >= count_check){
+				//0000000000System.out.println(Integer.parseInt(array[i]));
+				
+				int place_code = Integer.parseInt(array[i]) ;
+				int travel_Priority = Integer.parseInt(array01[i]) ;
+				
+				travel.setCount(count_check);
+				travel.setPlace_code(place_code);
+				travel.setTravel_Priority(travel_Priority);
+				
+				
+				
+				System.out.println("travel.setTravel_Priority : " + travel.getTravel_Priority());
+				System.out.println("travel.getCount : " + travel.getCount());
+				service1.planPriority(travel);
+				
+				
+			}
+			
+			if(count == count_check)
+				count_check = 1 ;
+			
+			
+			
+		}
 
+		
+		
+		//travel.setPlace_code(place_code);
+		
+//       
+//		service1.planPriority(travel);
+		return "success";
     }
 	
 	@ResponseBody
 	@RequestMapping (value="planPlaceDelete", method=RequestMethod.POST)
     public void planPlaceDelete(String place, String plan, String group, TravelListVO travel) throws Exception{
 	    
-		String place_code = place;
+		int place_code = Integer.parseInt(place);
 	    int group_Code = Integer.parseInt(group);
 	    Date travel_Date = Date.valueOf(plan);
 	       
@@ -172,6 +230,24 @@ public class SchduleContoller {
 	      
 	    service1.planDelete(travel);
 	}
+
+	@ResponseBody
+	@RequestMapping (value="planRealTimePriority", method=RequestMethod.POST)
+    public List<TravelListVO> planRealTimePriority(String plan, String group, TravelListVO travel) throws Exception{
+	    
+		
+	    int group_Code = Integer.parseInt(group);
+	    Date travel_Date = Date.valueOf(plan);
+	       
+	    
+	    travel.setGroup_Code(group_Code);
+	    travel.setTravel_Date(travel_Date);
+	      
+	    List<TravelListVO> list = service1.planRealTimePriority(travel);
+	    
+		return list;
+	}
+	
 
 	
 }

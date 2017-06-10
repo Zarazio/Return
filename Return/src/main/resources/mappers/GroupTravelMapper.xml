@@ -17,26 +17,27 @@
     <!-- Travel 단  -->
     
     <select id="travel_place" resultType="int">
-  	  select count(substr(place_code, 1,1)) from travel_list where travel_Date = #{travel_Date} and  group_Code = #{group_Code}
-	  and place_code LIKE #{place_code}
+  	  select count(*) from travel_list where travel_Date = #{travel_Date} and  group_Code = #{group_Code}
+	  
 	</select>
     
     <insert id="planList_insert">
-      insert into travel_list (travel_Date, place_code, group_Code)
-      values(#{travel_Date}, #{place_code} , #{group_Code})
+      insert into travel_list (travel_Date, place_code, group_Code, travel_Priority)
+      values(#{travel_Date}, #{place_code} , #{group_Code} , #{travel_Priority})
     </insert>
    
    <select id="planDayList" resultType="TravelListVO">
-     select b.place_code
+     select b.place_code, b.travel_Priority 
 	 from place_tbl a , travel_list b
 	 where a.place_code = b.place_code and b.group_Code=#{group_Code} and travel_Date=#{travel_Date}
    </select>
    
    <update id="planPriority">
-     update travel_list set travel_Priority=#{travel_Priority} 
+     update travel_list set travel_Priority=#{count} 
      where travel_Date = #{travel_Date} 
      and group_Code = #{group_Code} 
      and place_code = #{place_code}
+     and travel_Priority = #{travel_Priority}
    </update>
    
    <delete id="planDelete">
@@ -44,5 +45,12 @@
      and group_Code = #{group_Code} 
      and place_code = #{place_code}
    </delete>
+   
+   <select id="planRealTimePriority" resultType="TravelListVO">
+   	 select place_code, travel_Priority from travel_list 
+   	 where travel_Date = #{travel_Date} 
+     and group_Code = #{group_Code} 
+   
+   </select>
    
 </mapper>
